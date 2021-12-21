@@ -1,220 +1,78 @@
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Attribute
-import org.jsoup.nodes.Document
+import org.jsoup.nodes.Comment
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
 import org.jsoup.nodes.TextNode
+import java.io.File
 
 fun main() {
-    //println("Hello World!")
-    val html = """
-<div class="carousel rounded-box">
-  <div class="carousel-item">
-    <img src="https://picsum.photos/id/500/256/144">
-  </div> 
-  <div class="carousel-item">
-    <img src="https://picsum.photos/id/501/256/144">
-  </div> 
-  <div class="carousel-item">
-    <img src="https://picsum.photos/id/502/256/144">
-  </div> 
-  <div class="carousel-item">
-    <img src="https://picsum.photos/id/503/256/144">
-  </div> 
-  <div class="carousel-item">
-    <img src="https://picsum.photos/id/504/256/144">
-  </div> 
-  <div class="carousel-item">
-    <img src="https://picsum.photos/id/505/256/144">
-  </div> 
-  <div class="carousel-item">
-    <img src="https://picsum.photos/id/506/256/144">
-  </div>
-</div>
 
-""";
+    val html = File("/home/jens/Code/2021/jk/HtmlToComposeWeb/src/main/kotlin/html.text").readText()
     val doc = Jsoup.parse(html);
-    doc
 
-    printDoc(doc)
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-
-}
-
-fun printDoc(doc: Document) {
-    doc.body().childNodes().forEach {
-        printNode(it)
+    val text = doc.body().childNodes().joinToString(separator = "") {
+        getMyNode(it).print()
     }
 
+   // println(text)
+    File("/home/jens/Code/2021/jk/HtmlToComposeWeb/src/main/kotlin/Result.txt").writeText(text)
 }
 
-fun printNode(element: Node) {
-    getMyNode(element).print()
-
-}
 
 interface MyNode {
-    fun print()
+    fun print(): String
 }
 
-fun printStyle(it: Attribute) {
-    println("style{")
+fun printStyle(it: Attribute): String {
+    var str = "style {"
+
     //TODO Number oder StrinG?
     val styles = it.value.split(";")
     styles.filter { it.isNotEmpty() }.forEach {
-        val (propName, propValue) = it.split(": ")
-        val escpaedProp = propValue.replace("\"", "\\\"")
-        println("property(\"$propName\",\"${escpaedProp}\")")
+        val (propName, propValue) = it.split(":")
+        val escapedProp = propValue.replace("\"", "\\\"")
+        str += "property(\"$propName\",\"${escapedProp}\")"
     }
-    println("}")
-}
-
-class InputNode(val element: Element) : MyNode {
-    override fun print() {
-        println(element.tag().toString().capitalize() + "(")
-        val hasType = element.attributes().hasKey("type")
-        if (hasType) {
-            val type = element.attributes().get("type").capitalize()
-            println("type=InputType.${type},")
-        }
-        println("attrs={")
-        element.attributes().asList().forEach {
-            when (it.key) {
-                "type" -> {}
-                "class" -> {
-                    val classes = it.value.split(" ").joinToString { "\"$it\"" }
-                    println("classes($classes)")
-                }
-                "style" -> {
-                    printStyle(it)
-                }
-                else -> {
-                    printAttribute(it)
-                }
-            }
-        }
-        println("})")
-    }
-
+    return "$str}"
 }
 
 
-class TextAreaNode(val element: Element) : MyNode {
-
-    override fun print() {
-        println("TextArea(")
-
-        val attributesList = element.attributes().asList()
-        attributesList.forEachIndexed { index, attribute ->
-            if (index == 0) {
-                println("attrs={")
+fun printAttributes(attributesList: List<Attribute>): String {
+    var str = ""
+    attributesList.forEachIndexed { index, attribute ->
+        if (index == 0) {
+            str += "attrs = {\n"
+        }
+        str += when (attribute.key) {
+            "class" -> {
+                val classes = attribute.value.split(" ").joinToString { "\"$it\"" }
+                "classes($classes)"
             }
-            when (attribute.key) {
-                "class" -> {
-                    val classes = attribute.value.split(" ").joinToString { "\"$it\"" }
-                    println("classes($classes)")
-                }
-                "style" -> {
-                    printStyle(attribute)
-                }
-                else -> {
-                    printAttribute(attribute)
-                }
+            "style" -> {
+                printStyle(attribute)
             }
-            if (index == attributesList.lastIndex) {
-                println("}")
+            "required", "hidden", "selected", "disabled",  -> {
+                attribute.key + "()"
+            }
+            "readonly"-> {
+               "readOnly()"
+            }
+
+            "id" -> {
+                "id(\"${attribute.value}\")"
+            }
+
+            else -> {
+                "attr(\"${attribute.key}\",\"${attribute.value}\")"
             }
         }
-
-    }
-
-}
-
-class ImgNode(val element: Element) : MyNode {
-
-    override fun print() {
-        println(element.tag().toString().capitalize() + "(")
-        val hasSrc = element.attributes().hasKey("src")
-        if (hasSrc) {
-            println("src=\"${element.attributes().get("src")}\"")
-        }
-
-        element.attributes().remove("src")
-
-        val attributesList = element.attributes().asList()
-        attributesList.forEachIndexed { index, attribute ->
-            if (index == 0) {
-                println(",attrs={")
-            }
-            when (attribute.key) {
-
-                "class" -> {
-                    val classes = attribute.value.split(" ").joinToString { "\"$it\"" }
-                    println("classes($classes)")
-                }
-                "style" -> {
-                    printStyle(attribute)
-                }
-                else -> {
-                    printAttribute(attribute)
-                }
-            }
-            if (index == attributesList.lastIndex) {
-                println("}")
-            }
-        }
-        println(")")
-
-    }
-
-}
-
-class MyTextNode(private val textNode: TextNode) : MyNode {
-    override fun print() {
-        if (textNode.text().isNotBlank()) {
-            println("Text(\"${textNode.text()}\")")
+        str += "\n"
+        if (index == attributesList.lastIndex) {
+            str += "}"
         }
     }
-
-}
-
-fun printAttribute(attributes: Attribute) {
-    println("attr(\"${attributes.key}\",\"${attributes.value}\")")
-}
-
-class GenericNode(val element: Element) : MyNode {
-
-    override fun print() {
-        println(element.tag().toString().capitalize() + "(")
-        val attributesList = element.attributes().asList()
-        attributesList.forEachIndexed { index, attribute ->
-            if (index == 0) {
-                println("attrs={")
-            }
-            when (attribute.key) {
-                "class" -> {
-                    val classes = attribute.value.split(" ").joinToString { "\"$it\"" }
-                    println("classes($classes)")
-                }
-                "style" -> {
-                    printStyle(attribute)
-                }
-                else -> {
-                    printAttribute(attribute)
-                }
-            }
-            if (index == attributesList.lastIndex) {
-                println("}")
-            }
-        }
-        println("){")
-        element.childNodes().forEach {
-            printNode(it)
-        }
-
-        println("}")
-    }
+    return str
 }
 
 
@@ -223,13 +81,31 @@ fun getMyNode(ele: Node): MyNode {
         is TextNode -> {
             MyTextNode(ele)
         }
+        is Comment -> {
+            MyComment(ele)
+        }
         is Element -> {
             when (ele.tagName()) {
+                "form"->{
+                    FormNode(ele)
+                }
                 "img" -> {
                     ImgNode(ele)
                 }
                 "input" -> {
                     InputNode(ele)
+                }
+                "label" -> {
+                    LabelNode(ele)
+                }
+                "option" -> {
+                    OptionNode(ele)
+                }
+                "optgroup"->{
+                    OptGroupNode(ele)
+                }
+                "path" -> {
+                    PathNode(ele)
                 }
                 "textarea" -> {
                     TextAreaNode(ele)
@@ -248,37 +124,3 @@ fun getMyNode(ele: Node): MyNode {
 
 }
 
-fun printEle(element: Element) {
-    println(element.tag().toString().capitalize() + "(")
-    println("attrs={")
-    element.attributes().asList().forEach {
-        when (it.key) {
-            "class" -> {
-                val classes = it.value.split(" ").joinToString { "\"$it\"" }
-                println("classes($classes)")
-            }
-            "style" -> {
-                println("style{")
-                //TODO Number oder StrinG?
-                val styles = it.value.split(";")
-                styles.filter { it.isNotEmpty() }.forEach {
-                    val (propName, propValue) = it.split(": ")
-                    val escpaedProp = propValue.replace("\"", "\\\"")
-                    println("property(\"$propName\",\"${escpaedProp}\")")
-                }
-                println("}")
-            }
-            else -> {
-                println(it)
-            }
-        }
-    }
-    println("}){")
-    element.childNodes().forEach {
-        printNode(it)
-    }
-
-    println("}")
-
-
-}

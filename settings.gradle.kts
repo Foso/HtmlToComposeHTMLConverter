@@ -1,3 +1,3 @@
 
-rootProject.name = "HtmlToComposeWeb"
+rootProject.name = "HtmlToComposeWebConverter"
 
