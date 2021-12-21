@@ -1,0 +1,13 @@
+Picture {
+Source (attrs = {
+attr("media","(min-width:650px)")
+attr("srcset","https://www.w3schools.com/tags/img_pink_flowers.jpg")
+}){}
+Source (attrs = {
+attr("media","(min-width:465px)")
+attr("srcset","https://www.w3schools.com/tags/img_pink_flowers.jpg")
+}){}
+Img (attrs = {
+style {property("width","auto")}
+}, src = "img_orange_flowers.jpg", alt = "Flowers")
+}

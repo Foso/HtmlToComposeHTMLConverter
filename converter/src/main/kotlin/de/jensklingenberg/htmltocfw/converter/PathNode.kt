@@ -1,3 +1,5 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.Element
 
 class PathNode(private val element: Element) : MyNode {

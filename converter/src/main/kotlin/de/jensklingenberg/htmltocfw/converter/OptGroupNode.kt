@@ -1,25 +1,25 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
-class FormNode(private val element: Element) : MyNode {
+class OptGroupNode(private val element: Element) : MyNode {
 
     override fun print(): String {
 
-        var str = "Form ("
-        val actionValue = element.attributes().get("action")
-        element.attributes().remove("action")
+        var str = "OptGroup ("
+        val hasSrc = element.attributes().get("label")
+        element.attributes().remove("label")
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
         val attrText = printAttributes(attributesList)
-        str += attrText
+        str += (attrText)
 
-        if (actionValue.isNotBlank()) {
-            if (attrText.isNotBlank()) {
-                str += (", ")
-            }
+        if (attrText.isNotBlank()) {
+            str += (",")
         }
-        str += ("action = \"${actionValue}\"")
+        str += ("label = \"${hasSrc}\"")
         str += (")")
 
         val childNodesText = element.childNodes().joinToString(separator = "") {
@@ -27,11 +27,11 @@ class FormNode(private val element: Element) : MyNode {
         }
 
         str += "{"
-        if (childNodesText.isNotBlank()) {
+        if(childNodesText.isNotBlank()){
             str += "\n"
         }
         str += childNodesText
-        if (childNodesText.isNotBlank()) {
+        if(childNodesText.isNotBlank()){
             str += "\n"
         }
         str += ("}\n")

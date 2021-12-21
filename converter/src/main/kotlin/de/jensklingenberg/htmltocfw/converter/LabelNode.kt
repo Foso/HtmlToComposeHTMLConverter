@@ -1,23 +1,27 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
-class OptGroupNode(private val element: Element) : MyNode {
+class LabelNode(private val element: Element) : MyNode {
 
     override fun print(): String {
 
-        var str = "OptGroup ("
-        val hasSrc = element.attributes().get("label")
-        element.attributes().remove("label")
+        var str = "Label ("
+        val forValue = element.attributes().get("for")
+        element.attributes().remove("for")
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
         val attrText = printAttributes(attributesList)
-        str += (attrText)
+        str += attrText
 
-        if (attrText.isNotBlank()) {
-            str += (",")
+        if(forValue.isNotBlank()){
+            if (attrText.isNotBlank()) {
+                str += (", ")
+            }
         }
-        str += ("label = \"${hasSrc}\"")
+        str += ("forId = \"${forValue}\"")
         str += (")")
 
         val childNodesText = element.childNodes().joinToString(separator = "") {

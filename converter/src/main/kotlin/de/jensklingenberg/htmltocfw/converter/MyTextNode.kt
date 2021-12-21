@@ -1,3 +1,5 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.TextNode
 
 class MyTextNode(private val textNode: TextNode) : MyNode {

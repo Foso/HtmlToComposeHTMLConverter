@@ -1,3 +1,5 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.Comment
 
 class MyComment(private val comment: Comment) : MyNode {

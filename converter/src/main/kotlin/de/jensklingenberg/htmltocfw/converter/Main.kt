@@ -1,3 +1,5 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Comment
@@ -8,17 +10,22 @@ import java.io.File
 
 fun main() {
 
-    val html = File("/home/jens/Code/2021/jk/HtmlToComposeWeb/src/main/kotlin/html.text").readText()
+    val html = File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/de.jensklingenberg.htmltocfw.converter.main/kotlin/html.text").readText()
+
+    val text = htmlToCompose(html)
+
+    File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/de.jensklingenberg.htmltocfw.converter.main/kotlin/Result.txt").writeText(text)
+}
+
+fun htmlToCompose(html:String): String {
     val doc = Jsoup.parse(html);
 
     val text = doc.body().childNodes().joinToString(separator = "") {
         getMyNode(it).print()
     }
 
-   // println(text)
-    File("/home/jens/Code/2021/jk/HtmlToComposeWeb/src/main/kotlin/Result.txt").writeText(text)
+    return text
 }
-
 
 interface MyNode {
     fun print(): String
@@ -86,6 +93,9 @@ fun getMyNode(ele: Node): MyNode {
         }
         is Element -> {
             when (ele.tagName()) {
+                "a"->{
+                    ANode(ele)
+                }
                 "form"->{
                     FormNode(ele)
                 }

@@ -1,3 +1,5 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.Element
 
 class InputNode(private val element: Element) : MyNode {
@@ -17,7 +19,7 @@ class InputNode(private val element: Element) : MyNode {
             str += ("type = InputType.${type}")
         }
 
-        str += ")"
+        str += ")\n"
         return (str)
     }
 

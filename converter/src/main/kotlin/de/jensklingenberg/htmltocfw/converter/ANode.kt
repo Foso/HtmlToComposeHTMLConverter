@@ -1,26 +1,27 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
-class LabelNode(private val element: Element) : MyNode {
+class ANode(private val element: Element) : MyNode {
 
     override fun print(): String {
 
-        var str = "Label ("
-        val forValue = element.attributes().get("for")
-        element.attributes().remove("for")
+        var str = "A ("
+        val hrefValue = element.attributes().get("href")
+        element.attributes().remove("href")
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
         val attrText = printAttributes(attributesList)
         str += attrText
 
-        if(forValue.isNotBlank()){
+        if (hrefValue.isNotBlank()) {
             if (attrText.isNotBlank()) {
                 str += (", ")
             }
         }
-        str += ("forId = \"${forValue}\"")
-
+        str += ("href = \"${hrefValue}\"")
         str += (")")
 
         val childNodesText = element.childNodes().joinToString(separator = "") {
@@ -28,11 +29,11 @@ class LabelNode(private val element: Element) : MyNode {
         }
 
         str += "{"
-        if(childNodesText.isNotBlank()){
+        if (childNodesText.isNotBlank()) {
             str += "\n"
         }
         str += childNodesText
-        if(childNodesText.isNotBlank()){
+        if (childNodesText.isNotBlank()) {
             str += "\n"
         }
         str += ("}\n")

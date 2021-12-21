@@ -1,9 +1,11 @@
+package de.jensklingenberg.htmltocfw.converter
+
 import org.jsoup.nodes.Element
 
 class GenericNode(private val element: Element) : MyNode {
 
     override fun print(): String {
-        var str = "\n"+element.tag().toString().capitalize() + " "
+        var str = element.tag().toString().capitalize() + " "
 
         val attrs = printAttributes(element.attributes().asList())
         if (attrs.isNotBlank()) {
