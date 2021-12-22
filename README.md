@@ -35,8 +35,22 @@ Into this:
 4) Your code is now inserted at your cursor.
 
 
+## What this plugin can't do:
+* Convert JavaScript: 
+
+ The <script> tag will be ignored, but Inline Javascript will be set without changes to the corresponding property. See the "button" code example above.
+  
+* Convert style sheets: 
+ 
+ The <style> tag will be ignored, but inlined styles will be set to the corresponding style{} property. See the "button" code example above.
+
+* Convert < head>
+  
+  For now only the **< body>** will be parsed 
+  
 ## :arrow_down:&nbsp;How to install?
 
+(It's in Review in the Marketplace right now, so you won't find it)
 You can install plugin directly from IntelliJ IDEA or Android Studio:
 1. Open _Preferences_
 2. Choose _Plugins_
