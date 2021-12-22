@@ -24,8 +24,15 @@ Into this:
 ## Introduction / HOW TO USE
 
 1) Put your cursor to the place where you want to insert the Compose code.
-2) 
-
+2) Open the Plugin unter Tools> HTML to Compose Web
+ <p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideatools.png" height=500 />
+</p>
+4) Add your HTML to press "Generate" 
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideaWindow.png" height=500 />
+</p>
+5) Your code is now inserted at your cursor.
 
 # 🏠 Architecture
 
