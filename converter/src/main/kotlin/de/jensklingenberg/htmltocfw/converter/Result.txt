@@ -1,13 +1,16 @@
-Picture {
-Source (attrs = {
-attr("media","(min-width:650px)")
-attr("srcset","https://www.w3schools.com/tags/img_pink_flowers.jpg")
-}){}
-Source (attrs = {
-attr("media","(min-width:465px)")
-attr("srcset","https://www.w3schools.com/tags/img_pink_flowers.jpg")
-}){}
-Img (attrs = {
-style {property("width","auto")}
-}, src = "img_orange_flowers.jpg", alt = "Flowers")
+H1 (attrs = {
+style {
+fontFamily("verdana")
+}
+}){
+Text("This is a heading")
+
+}
+P (attrs = {
+style {
+fontFamily("courier")
+}
+}){
+Text("This is a paragraph.")
+
 }

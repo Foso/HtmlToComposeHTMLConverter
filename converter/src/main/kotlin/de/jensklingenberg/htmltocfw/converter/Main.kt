@@ -10,11 +10,11 @@ import java.io.File
 
 fun main() {
 
-    val html = File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/de.jensklingenberg.htmltocfw.converter.main/kotlin/html.text").readText()
+    val html = File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/html.text").readText()
 
     val text = htmlToCompose(html)
 
-    File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/de.jensklingenberg.htmltocfw.converter.main/kotlin/Result.txt").writeText(text)
+    File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/Result.txt").writeText(text)
 }
 
 fun htmlToCompose(html:String): String {
@@ -31,15 +31,37 @@ interface MyNode {
     fun print(): String
 }
 
-fun printStyle(it: Attribute): String {
-    var str = "style {"
+fun getStyleText(attribute: Attribute): String {
+    var str = "style {\n"
 
     //TODO Number oder StrinG?
-    val styles = it.value.split(";")
-    styles.filter { it.isNotEmpty() }.forEach {
-        val (propName, propValue) = it.split(":")
-        val escapedProp = propValue.replace("\"", "\\\"")
-        str += "property(\"$propName\",\"${escapedProp}\")"
+    //Find better way to parse style
+    val styles = attribute.value.split(";")
+
+    styles.filter { it.isNotEmpty() }.map { it.trimStart() }.forEach {
+        val propName = it.substringBefore(":").trimStart()
+        val propValue = it.substringAfter(":").trimStart().replace("\"", "\\\"")
+
+        str += when(propName){
+            "font"->{
+                "font(\"${propValue}\")"
+            }
+            "font-family"->{
+                "fontFamily(\"${propValue}\")"
+            }
+            "_font-size"->{
+                var unit = propValue
+                "fontFamily(\"${propValue}\")"
+            }
+            "background-image"->{
+                "backgroundImage(\"${propValue}\")"
+            }
+            else ->{
+                "property(\"$propName\",\"${propValue}\")"
+            }
+        }
+
+        str += "\n"
     }
     return "$str}"
 }
@@ -56,14 +78,26 @@ fun printAttributes(attributesList: List<Attribute>): String {
                 val classes = attribute.value.split(" ").joinToString { "\"$it\"" }
                 "classes($classes)"
             }
+            "draggable"->{
+                "draggable(Draggable.${attribute.value.capitalize()})"
+            }
             "style" -> {
-                printStyle(attribute)
+                getStyleText(attribute)
             }
             "required", "hidden", "selected", "disabled",  -> {
                 attribute.key + "()"
             }
             "readonly"-> {
                "readOnly()"
+            }
+            "onclick343"->{
+                "onClick { js(\"${attribute.value}\") }"
+            }
+            "onblur"->{
+                "onBlur { js(\"${attribute.value}\") }"
+            }
+            "ondblclick"->{
+                "onDoubleClick { js(\"${attribute.value}\") }"
             }
 
             "id" -> {
@@ -82,51 +116,62 @@ fun printAttributes(attributesList: List<Attribute>): String {
     return str
 }
 
+class UnsupportedNode : MyNode{
+    override fun print(): String {
+        return ""
+    }
 
-fun getMyNode(ele: Node): MyNode {
-    return when (ele) {
+}
+
+fun getMyNode(node: Node): MyNode {
+    return when (node) {
         is TextNode -> {
-            MyTextNode(ele)
+            MyTextNode(node)
         }
         is Comment -> {
-            MyComment(ele)
+            MyComment(node)
         }
         is Element -> {
-            when (ele.tagName()) {
+            when (node.tagName()) {
                 "a"->{
-                    ANode(ele)
+                    ANode(node)
                 }
                 "form"->{
-                    FormNode(ele)
+                    FormNode(node)
                 }
                 "img" -> {
-                    ImgNode(ele)
+                    ImgNode(node)
                 }
                 "input" -> {
-                    InputNode(ele)
+                    InputNode(node)
                 }
                 "label" -> {
-                    LabelNode(ele)
+                    LabelNode(node)
                 }
                 "option" -> {
-                    OptionNode(ele)
+                    OptionNode(node)
                 }
                 "optgroup"->{
-                    OptGroupNode(ele)
+                    OptGroupNode(node)
                 }
                 "path" -> {
-                    PathNode(ele)
+                    PathNode(node)
                 }
                 "textarea" -> {
-                    TextAreaNode(ele)
+                    TextAreaNode(node)
                 }
+                "script"->{
+                    return UnsupportedNode()
+                }
+
                 else -> {
-                    GenericNode(ele)
+                    GenericNode(node)
                 }
             }
         }
         else -> {
-            throw Exception("$ele Not found")
+            println("Not found: ${node.nodeName()}")
+            return UnsupportedNode()
         }
 
     }

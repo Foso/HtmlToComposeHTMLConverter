@@ -1,4 +1,5 @@
 import de.jensklingenberg.htmltocfw.converter.getMyNode
+import de.jensklingenberg.htmltocfw.converter.htmlToCompose
 import org.jsoup.Jsoup
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -44,7 +45,7 @@ class myTest {
 
     @Test
     fun nodeATest(){
-        val doc = Jsoup.parse(""" <a href="https://www.w3schools.com">Visit W3Schools.com!</a> """);
+        val html = """ <a href="https://www.w3schools.com">Visit W3Schools.com!</a> """
         val exp = """
             A (href = "https://www.w3schools.com"){
             Text("Visit W3Schools.com!")
@@ -52,9 +53,22 @@ class myTest {
             
             """.trimIndent()
 
-        val text = doc.body().childNodes().joinToString(separator = "") {
-            getMyNode(it).print()
-        }
+        val text = htmlToCompose(html)
+
+        assertEquals(exp,text)
+    }
+
+    @Test
+    fun failedTest(){
+        val html = """ a href="https://www.w3schools.com<<">Visit W3Schools.com!</a> """
+        val exp = """
+            A (href = "https://www.w3schools.com"){
+            Text("Visit W3Schools.com!")
+            }
+            
+            """.trimIndent()
+
+        val text = htmlToCompose(html)
 
         assertEquals(exp,text)
     }

@@ -22,7 +22,7 @@ class ImgNode(val element: Element) : MyNode {
         }
         str += ("src = \"${srcValue}\"")
         str += (", alt = \"${altValue}\"")
-        str += (")")
+        str += (")\n")
 
         return str
     }
