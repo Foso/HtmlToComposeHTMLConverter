@@ -2,6 +2,7 @@ package de.jensklingenberg.htmltocfw.converter
 
 import de.jensklingenberg.htmltocfw.converter.node.getMyNode
 import org.jsoup.Jsoup
+import org.jsoup.parser.ParseSettings
 import org.jsoup.parser.Parser
 import java.io.File
 
@@ -18,7 +19,9 @@ fun main() {
 }
 
 fun htmlToCompose(html: String): String {
-    val doc = Jsoup.parse(html, Parser.xmlParser());
+    val  parser = Parser.htmlParser();
+    parser.settings(ParseSettings(true, true))
+    val doc = parser.parseInput(html,"")
 
     return doc.body().childNodes().joinToString(separator = "") {
         getMyNode(it).print()

@@ -1,10 +1,10 @@
-import de.jensklingenberg.htmltocfw.converter.getMyNode
 import de.jensklingenberg.htmltocfw.converter.htmlToCompose
+import de.jensklingenberg.htmltocfw.converter.node.getMyNode
 import org.jsoup.Jsoup
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class myTest {
+class MyTest {
 
     @Test
     fun ButtonTest(){
@@ -15,6 +15,7 @@ class myTest {
             attr("onclick","alert('Hello world!')")
             }){
             Text("Click Me!")
+            
             }
             
             """.trimIndent()
@@ -34,6 +35,7 @@ class myTest {
             attr("width","500")
             attr("height","600")
             }, src = "img_girl.jpg", alt = "Girl in a jacket")
+            
             """.trimIndent()
 
         val text = doc.body().childNodes().joinToString(separator = "") {
@@ -45,10 +47,11 @@ class myTest {
 
     @Test
     fun nodeATest(){
-        val html = """ <a href="https://www.w3schools.com">Visit W3Schools.com!</a> """
+        val html = """<a href="https://www.w3schools.com">Visit W3Schools.com!</a> """
         val exp = """
             A (href = "https://www.w3schools.com"){
             Text("Visit W3Schools.com!")
+            
             }
             
             """.trimIndent()
@@ -60,10 +63,11 @@ class myTest {
 
     @Test
     fun failedTest(){
-        val html = """ a href="https://www.w3schools.com<<">Visit W3Schools.com!</a> """
+        val html = """ <a href="https://www.w3schools.com">Visit W3Schools.com!</a> """
         val exp = """
             A (href = "https://www.w3schools.com"){
             Text("Visit W3Schools.com!")
+            
             }
             
             """.trimIndent()
