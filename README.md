@@ -1,6 +1,15 @@
 <h1 align="center">HtmlToComposeWebConverter</h1>
 Intellij Idea Plugin that can convert HTML to Compose for Web code.
 
+Turn this:
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/buttonhtml.png" height=500 />
+</p>
+
+Into this:
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/composebutton.png" height=500 />
+</p>
 
 [![jCenter](https://img.shields.io/badge/Apache-2.0-green.svg
 )](https://github.com/Foso/HtmlToComposeWebConverter/blob/master/LICENSE)
@@ -12,8 +21,10 @@ Intellij Idea Plugin that can convert HTML to Compose for Web code.
 
 [![GitHub stars](https://img.shields.io/github/stars/Foso/HtmlToComposeWebConverter.svg?style=social&label=Star)](https://github.com/Foso/HtmlToComposeWebConverter) [![GitHub forks](https://img.shields.io/github/forks/Foso/HtmlToComposeWebConverter.svg?style=social&label=Fork)](https://github.com/Foso/HtmlToComposeWebConverter/fork) [![GitHub watchers](https://img.shields.io/github/watchers/Foso/HtmlToComposeWebConverter.svg?style=social&label=Watch)](https://github.com/Foso/HtmlToComposeWebConverter) [![Twitter Follow](https://img.shields.io/twitter/follow/jklingenberg_.svg?style=social)](https://twitter.com/jklingenberg_)
 
-## Introduction
+## Introduction / HOW TO USE
 
+1) Put your cursor to the place where you want to insert the Compose code.
+2) 
 
 
 # 🏠 Architecture
