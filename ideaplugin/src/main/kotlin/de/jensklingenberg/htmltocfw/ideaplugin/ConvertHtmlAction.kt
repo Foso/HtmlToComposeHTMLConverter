@@ -59,6 +59,7 @@ class ConvertHtmlAction : DumbAwareAction() {
                         Surface(modifier = Modifier.fillMaxSize()) {
                             Column {
                                 val textState = remember { mutableStateOf(TextFieldValue()) }
+                                Text("Drop your HTML into the textfield and press generate")
                                 TextField(
                                     value = textState.value,
                                     onValueChange = { textState.value = it }
