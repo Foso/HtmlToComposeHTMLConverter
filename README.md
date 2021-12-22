@@ -44,7 +44,7 @@ Into this:
 
 
 ### Project Structure
-* <kbd>converter/main</kbd> - Module with the converter 
+* <kbd>converter</kbd> - Module with the converter 
 * <kbd>ideaplugin</kbd> - Module with the Idea Plugin that is using the converter
 
 ## ✍️ Feedback
