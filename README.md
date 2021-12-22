@@ -1,6 +1,15 @@
 <h1 align="center">HtmlToComposeWebConverter</h1>
 Intellij Idea Plugin that can convert HTML to Compose for Web code.
 
+Turn this:
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/buttonhtml.png" height=500 />
+</p>
+
+Into this:
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/composebutton.png" height=500 />
+</p>
 
 [![jCenter](https://img.shields.io/badge/Apache-2.0-green.svg
 )](https://github.com/Foso/HtmlToComposeWebConverter/blob/master/LICENSE)
@@ -12,9 +21,43 @@ Intellij Idea Plugin that can convert HTML to Compose for Web code.
 
 [![GitHub stars](https://img.shields.io/github/stars/Foso/HtmlToComposeWebConverter.svg?style=social&label=Star)](https://github.com/Foso/HtmlToComposeWebConverter) [![GitHub forks](https://img.shields.io/github/forks/Foso/HtmlToComposeWebConverter.svg?style=social&label=Fork)](https://github.com/Foso/HtmlToComposeWebConverter/fork) [![GitHub watchers](https://img.shields.io/github/watchers/Foso/HtmlToComposeWebConverter.svg?style=social&label=Watch)](https://github.com/Foso/HtmlToComposeWebConverter) [![Twitter Follow](https://img.shields.io/twitter/follow/jklingenberg_.svg?style=social)](https://twitter.com/jklingenberg_)
 
-## Introduction
+## Introduction / HOW TO USE
+
+1) Put your cursor to the place where you want to insert the Compose code.
+2) Open the Plugin under Tools> HTML to Compose Web
+ <p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideatools.png" height=500 />
+</p>
+3) Add your HTML to press "Generate" 
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideaWindow.png" height=500 />
+</p>
+4) Your code is now inserted at your cursor.
 
 
+## :arrow_down:&nbsp;How to install?
+
+You can install plugin directly from IntelliJ IDEA or Android Studio:
+1. Open _Preferences_
+2. Choose _Plugins_
+3. Select the _Marketplace_ tab
+4. Search for **HtmlToComposeWebConverter**
+5. Click on _install_
+
+Alternativly you can download the plugin from the release archive https://github.com/Foso/HtmlToComposeWebConverter/releases.  To learn how to install it, read the [Install plugin from disk](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) section in the IntelliJ docs.
+
+## :card_file_box:&nbsp;How can I contribute to this plugin?
+
+* Create a [bug report](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=bug&template=i-encountered-a-bug-while-using-the-plugin.md&title=) when accounting a bug
+* Create a [feature request](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=enhancement&template=i-d-like-to-request-a-feature.md&title=)
+* Open up a [pull request](https://github.com/Foso/HtmlToComposeWebConverter/pulls)
+
+## :fire:&nbsp;What's new?
+
+### 1.0.0
+<ul>
+    <li>initial release</li>
+</ul>
 
 # 🏠 Architecture
 
@@ -26,7 +69,7 @@ Intellij Idea Plugin that can convert HTML to Compose for Web code.
 
 
 ### Project Structure
-* <kbd>converter/main</kbd> - Module with the converter 
+* <kbd>converter</kbd> - Module with the converter 
 * <kbd>ideaplugin</kbd> - Module with the Idea Plugin that is using the converter
 
 ## ✍️ Feedback
