@@ -35,6 +35,29 @@ Into this:
 </p>
 5) Your code is now inserted at your cursor.
 
+
+## :arrow_down:&nbsp;How to install?
+
+You can install plugin directly from IntelliJ IDEA or Android Studio:
+1. Open _Preferences_
+2. Choose _Plugins_
+3. Select the _Marketplace_ tab
+4. Search for **HtmlToComposeWebConverter**
+5. Click on _install_
+
+## :card_file_box:&nbsp;How can I contribute to this plugin?
+
+* Create a [bug report](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=bug&template=i-encountered-a-bug-while-using-the-plugin.md&title=) when accounting a bug
+* Create a [feature request](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=enhancement&template=i-d-like-to-request-a-feature.md&title=)
+* Open up a [pull request](https://github.com/Foso/HtmlToComposeWebConverter/pulls)
+
+## :fire:&nbsp;What's new?
+
+### 1.0.0
+<ul>
+    <li>initial release</li>
+</ul>
+
 # 🏠 Architecture
 
 ## 🛠️ Built With
