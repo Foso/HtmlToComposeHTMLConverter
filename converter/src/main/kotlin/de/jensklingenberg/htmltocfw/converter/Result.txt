@@ -1,16 +1,34 @@
-H1 (attrs = {
-style {
-fontFamily("verdana")
-}
-}){
-Text("This is a heading")
+H1 {
+Text("The input element")
 
 }
-P (attrs = {
-style {
-fontFamily("courier")
+Form (action = "/action_page.php"){
+Label (forId = "fname"){
+Text("First name:")
+
 }
-}){
-Text("This is a paragraph.")
+Input (attrs = {
+id("fname")
+name("fname")
+}, type = InputType.Text)
+Br {}
+Br {}
+Label (forId = "lname"){
+Text("Last name:")
+
+}
+Input (attrs = {
+id("lname")
+name("lname")
+}, type = InputType.Text)
+Br {}
+Br {}
+Input (attrs = {
+attr("value","Submit")
+}, type = InputType.Submit)
+
+}
+P {
+Text("Click the \"Submit\" button and the form-data will be sent to a page on the server called \"action_page.php\".")
 
 }

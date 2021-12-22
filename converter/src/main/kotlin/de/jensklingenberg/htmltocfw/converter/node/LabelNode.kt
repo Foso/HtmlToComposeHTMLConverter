@@ -1,27 +1,27 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.getAttributesText
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
-class FormNode(private val element: Element) : MyNode {
+class LabelNode(private val element: Element) : MyNode {
 
     override fun print(): String {
-
-        var str = "Form ("
-        val actionValue = element.attributes().get("action")
-        element.attributes().remove("action")
+        var str = "Label ("
+        val forValue = element.attributes().get("for")
+        element.attributes().remove("for")
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
-        val attrText = printAttributes(attributesList)
+        val attrText = getAttributesText(attributesList)
         str += attrText
 
-        if (actionValue.isNotBlank()) {
+        if (forValue.isNotBlank()) {
             if (attrText.isNotBlank()) {
                 str += (", ")
             }
         }
-        str += ("action = \"${actionValue}\"")
+        str += ("forId = \"${forValue}\"")
         str += (")")
 
         val childNodesText = element.childNodes().joinToString(separator = "") {

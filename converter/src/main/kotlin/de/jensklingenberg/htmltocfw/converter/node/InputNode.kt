@@ -1,5 +1,6 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.getAttributesText
 import org.jsoup.nodes.Element
 
 class InputNode(private val element: Element) : MyNode {
@@ -8,7 +9,7 @@ class InputNode(private val element: Element) : MyNode {
         var str = "Input ("
         val hasType = element.attributes().get("type")
         element.attributes().remove("type")
-        val attrText = printAttributes(element.attributes().asList())
+        val attrText = getAttributesText(element.attributes().asList())
         str += attrText
 
         if (hasType.isNotBlank()) {

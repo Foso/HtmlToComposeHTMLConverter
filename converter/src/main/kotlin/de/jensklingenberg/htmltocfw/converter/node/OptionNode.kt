@@ -1,25 +1,26 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.getAttributesText
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
-class OptGroupNode(private val element: Element) : MyNode {
+class OptionNode(private val element: Element) : MyNode {
 
     override fun print(): String {
 
-        var str = "OptGroup ("
-        val hasSrc = element.attributes().get("label")
-        element.attributes().remove("label")
+        var str = "Option ("
+        val valueValue = element.attributes().get("value")
+        element.attributes().remove("value")
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
-        val attrText = printAttributes(attributesList)
+        val attrText = getAttributesText(attributesList)
         str += (attrText)
 
         if (attrText.isNotBlank()) {
             str += (",")
         }
-        str += ("label = \"${hasSrc}\"")
+        str += ("value = \"${valueValue}\"")
         str += (")")
 
         val childNodesText = element.childNodes().joinToString(separator = "") {
@@ -27,11 +28,11 @@ class OptGroupNode(private val element: Element) : MyNode {
         }
 
         str += "{"
-        if(childNodesText.isNotBlank()){
+        if (childNodesText.isNotBlank()) {
             str += "\n"
         }
         str += childNodesText
-        if(childNodesText.isNotBlank()){
+        if (childNodesText.isNotBlank()) {
             str += "\n"
         }
         str += ("}\n")

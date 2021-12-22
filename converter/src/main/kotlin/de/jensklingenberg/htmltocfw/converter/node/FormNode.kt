@@ -1,27 +1,27 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.getAttributesText
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
-class LabelNode(private val element: Element) : MyNode {
+class FormNode(private val element: Element) : MyNode {
 
     override fun print(): String {
-
-        var str = "Label ("
-        val forValue = element.attributes().get("for")
-        element.attributes().remove("for")
+        var str = "Form ("
+        val actionValue = element.attributes().get("action")
+        element.attributes().remove("action")
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
-        val attrText = printAttributes(attributesList)
+        val attrText = getAttributesText(attributesList)
         str += attrText
 
-        if(forValue.isNotBlank()){
+        if (actionValue.isNotBlank()) {
             if (attrText.isNotBlank()) {
                 str += (", ")
             }
         }
-        str += ("forId = \"${forValue}\"")
+        str += ("action = \"${actionValue}\"")
         str += (")")
 
         val childNodesText = element.childNodes().joinToString(separator = "") {
@@ -29,11 +29,11 @@ class LabelNode(private val element: Element) : MyNode {
         }
 
         str += "{"
-        if(childNodesText.isNotBlank()){
+        if (childNodesText.isNotBlank()) {
             str += "\n"
         }
         str += childNodesText
-        if(childNodesText.isNotBlank()){
+        if (childNodesText.isNotBlank()) {
             str += "\n"
         }
         str += ("}\n")

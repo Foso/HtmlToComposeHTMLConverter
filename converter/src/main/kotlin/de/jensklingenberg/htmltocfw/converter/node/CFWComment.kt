@@ -1,8 +1,8 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
 import org.jsoup.nodes.Comment
 
-class MyComment(private val comment: Comment) : MyNode {
+class CFWComment(private val comment: Comment) : MyNode {
     override fun print(): String {
         return ("//" + comment.data)
     }

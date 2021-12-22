@@ -1,5 +1,6 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.getAttributesText
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
@@ -13,7 +14,7 @@ class ANode(private val element: Element) : MyNode {
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
-        val attrText = printAttributes(attributesList)
+        val attrText = getAttributesText(attributesList)
         str += attrText
 
         if (hrefValue.isNotBlank()) {

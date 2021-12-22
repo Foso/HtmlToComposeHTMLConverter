@@ -1,8 +1,8 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
 import org.jsoup.nodes.TextNode
 
-class MyTextNode(private val textNode: TextNode) : MyNode {
+class CFWTextNode(private val textNode: TextNode) : MyNode {
     override fun print(): String {
         return if (textNode.text().isNotBlank()) {
             val text = textNode.text().replace("\"", "\\\"")

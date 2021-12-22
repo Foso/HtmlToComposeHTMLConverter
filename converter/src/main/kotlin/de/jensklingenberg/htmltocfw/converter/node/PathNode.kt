@@ -1,5 +1,6 @@
-package de.jensklingenberg.htmltocfw.converter
+package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.getAttributesText
 import org.jsoup.nodes.Element
 
 class PathNode(private val element: Element) : MyNode {
@@ -9,7 +10,7 @@ class PathNode(private val element: Element) : MyNode {
         val dValue = element.attributes().get("d")
         element.attributes().remove("d")
 
-        str += (printAttributes(element.attributes().asList()))
+        str += (getAttributesText(element.attributes().asList()))
 
         if (dValue.isNotBlank()) {
             val type = dValue.capitalize()
