@@ -23,8 +23,9 @@ Into this:
 
 ## Introduction / HOW TO USE
 
-1) Put your cursor to the place where you want to insert the Compose code.
-2) Open the Plugin unter Tools> HTML to Compose Web
+1) Get the plugin from the Marketplace or download the plugin from the release archive.  To learn how to install it, read the [Install plugin from disk](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) section in the IntelliJ docs.
+2) Put your cursor to the place where you want to insert the Compose code.
+3) Open the Plugin unter Tools> HTML to Compose Web
  <p align="center">
   <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideatools.png" height=500 />
 </p>
