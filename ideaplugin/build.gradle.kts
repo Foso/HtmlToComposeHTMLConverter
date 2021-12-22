@@ -8,8 +8,8 @@ plugins {
     id("idea")
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "de.jensklingenberg"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -25,9 +25,17 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version.set("2021.3")
+    version.set("2021.2")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+tasks{
+    withType<org.jetbrains.intellij.tasks.PublishPluginTask> {
+        //token.set("XXX")
+    }
+
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions.jvmTarget = "11"
+    }
+
 }
+

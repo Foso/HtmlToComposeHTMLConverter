@@ -1,10 +1,36 @@
 <idea-plugin>
-    <id>com.jetbrains.ComposeDemoPlugin</id>
-    <name>Jetpack Compose for Desktop Demo</name>
-    <vendor email="support@jetbrains.com" url="http://www.jetbrains.com">JetBrains</vendor>
+    <id>de.jensklingenberg.htmltocfw</id>
+    <name>HTML to Compose Web Converter</name>
+    <vendor email="mail@jensklingenberg.de" url="http://www.jensklingenberg.de">Jens Klingenberg</vendor>
 
     <description><![CDATA[
-A plugin demonstrates Jetpack compose capabilities on IntelliJ Platform
+    <h3>Intellij Idea Plugin that can convert HTML to Compose for Web code.</h3>
+
+   Turn this:
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/buttonhtml.png" height=500 />
+</p>
+
+Into this:
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/composebutton.png" height=500 />
+</p>
+
+## Introduction / HOW TO USE
+
+1) Put your cursor to the place where you want to insert the Compose code.
+2) Open the Plugin under Tools> HTML to Compose Web
+ <p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideatools.png" height=500 />
+</p>
+3) Add your HTML to press "Generate"
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideaWindow.png" height=500 />
+</p>
+4) Your code is now inserted at your cursor.
+
+
+Source code is available at https://github.com/Foso/HtmlToComposeWebConverter
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

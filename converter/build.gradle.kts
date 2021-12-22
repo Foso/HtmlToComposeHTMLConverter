@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10-RC"
+    kotlin("jvm") version "1.6.10"
     application
 }
 
-group = "me.jens"
+group = "de.jensklingenberg"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -17,7 +17,6 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jsoup:jsoup:1.14.3")
-  //  implementation("org.jetbrains.compose.web:web-core:1.0.0")
 }
 
 tasks.test {
