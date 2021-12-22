@@ -50,7 +50,7 @@ Into this:
   
 ## :arrow_down:&nbsp;How to install?
 
-(It's in Review in the Marketplace right now, so can't find it)
+(It's in Review in the Marketplace right now, so you won't find it)
 You can install plugin directly from IntelliJ IDEA or Android Studio:
 1. Open _Preferences_
 2. Choose _Plugins_
