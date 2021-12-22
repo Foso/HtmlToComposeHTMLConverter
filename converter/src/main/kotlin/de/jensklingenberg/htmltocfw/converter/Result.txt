@@ -1,34 +1,16 @@
-H1 {
-Text("The input element")
-
+Button (attrs = {
+name("button")
+attr("type","button")
+style {
+margin(16.px)
+padding(16.px)
+property("background-color","darkblue")
+property("color","aliceblue")
+borderRadius(4.px)
+fontSize(12.px)
 }
-Form (action = "/action_page.php"){
-Label (forId = "fname"){
-Text("First name:")
-
-}
-Input (attrs = {
-id("fname")
-name("fname")
-}, type = InputType.Text)
-Br {}
-Br {}
-Label (forId = "lname"){
-Text("Last name:")
-
-}
-Input (attrs = {
-id("lname")
-name("lname")
-}, type = InputType.Text)
-Br {}
-Br {}
-Input (attrs = {
-attr("value","Submit")
-}, type = InputType.Submit)
-
-}
-P {
-Text("Click the \"Submit\" button and the form-data will be sent to a page on the server called \"action_page.php\".")
+attr("onClick","alert('Hello World!')")
+}){
+Text("Click Me!")
 
 }

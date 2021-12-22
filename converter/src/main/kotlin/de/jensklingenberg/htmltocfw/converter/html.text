@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html>
-<body>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Document</title>
+    </head>
+    <body>
 
-<h1>The input element</h1>
+        <button name="button" type="button" style="margin: 16px; padding: 16px; background-color: darkblue; color: aliceblue;border-radius: 4px;font-size: 12px" onClick="alert('Hello World!')">Click Me!</button>
 
-<form action="/action_page.php">
-  <label for="fname">First name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <label for="lname">Last name:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <input type="submit" value="Submit">
-</form>
-
-<p>Click the "Submit" button and the form-data will be sent to a page on the
-server called "action_page.php".</p>
-
-</body>
-</html>
+    </body>
+    </html>
