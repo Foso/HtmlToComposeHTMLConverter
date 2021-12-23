@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "de.jensklingenberg"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -20,7 +20,11 @@ repositories {
 }
 
 dependencies {
-    implementation(compose.desktop.currentOs)
+    implementation(compose.desktop.linux_x64)
+    implementation(compose.desktop.linux_arm64)
+    implementation(compose.desktop.windows_x64)
+    implementation(compose.desktop.macos_arm64)
+    implementation(compose.desktop.macos_x64)
     implementation(project(":converter", "default"))
     testImplementation("junit", "junit", "4.12")
 }
@@ -43,8 +47,6 @@ tasks{
         version.set(properties("pluginVersion"))
         sinceBuild.set(properties("pluginSinceBuild"))
         untilBuild.set(properties("pluginUntilBuild"))
-
-
     }
 }
 
