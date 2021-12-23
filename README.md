@@ -50,7 +50,8 @@ Into this:
   
 ## :arrow_down:&nbsp;How to install?
 
-(It's in Review in the Marketplace right now, so you won't find it)
+(It's in Review in the Marketplace right now, so you won't find it, install it manually)
+  
 You can install plugin directly from IntelliJ IDEA or Android Studio:
 1. Open _Preferences_
 2. Choose _Plugins_
@@ -58,7 +59,8 @@ You can install plugin directly from IntelliJ IDEA or Android Studio:
 4. Search for **HtmlToComposeWebConverter**
 5. Click on _install_
 
-Alternativly you can download the plugin from the release archive https://github.com/Foso/HtmlToComposeWebConverter/releases.  To learn how to install it, read the [Install plugin from disk](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) section in the IntelliJ docs.
+  
+Alternatively you can download the plugin from the release archive https://github.com/Foso/HtmlToComposeWebConverter/releases.  To learn how to install it, read the [Install plugin from disk](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) section in the IntelliJ docs.
 
 ## :card_file_box:&nbsp;How can I contribute to this plugin?
 
