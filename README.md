@@ -3,12 +3,12 @@ Intellij Idea Plugin that can convert HTML to Compose for Web code.
 
 Turn this:
 <p align="center">
-  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/buttonhtml.png" height=500 />
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/master/docs/buttonhtml.png" height=500 />
 </p>
 
 Into this:
 <p align="center">
-  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/composebutton.png" height=500 />
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/master/docs/composebutton.png" height=500 />
 </p>
 
 [![jCenter](https://img.shields.io/badge/Apache-2.0-green.svg
