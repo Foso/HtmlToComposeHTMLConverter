@@ -70,7 +70,7 @@ Alternatively you can download the plugin from the release archive https://githu
 
 ## :fire:&nbsp;What's new?
 
-### 1.0.0
+### 1.0.3
 <ul>
     <li>initial release</li>
 </ul>
