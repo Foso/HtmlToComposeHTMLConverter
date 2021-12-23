@@ -1,4 +1,6 @@
 import org.jetbrains.compose.compose
+fun properties(key: String) = project.findProperty(key).toString()
+
 
 plugins {
     id("org.jetbrains.intellij") version "1.3.0"
@@ -9,7 +11,7 @@ plugins {
 }
 
 group = "de.jensklingenberg"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -25,7 +27,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version.set("2021.2")
+    version.set(properties("platformVersion"))
 }
 
 tasks{
@@ -37,5 +39,12 @@ tasks{
         kotlinOptions.jvmTarget = "11"
     }
 
+    patchPluginXml {
+        version.set(properties("pluginVersion"))
+        sinceBuild.set(properties("pluginSinceBuild"))
+        untilBuild.set(properties("pluginUntilBuild"))
+
+
+    }
 }
 
