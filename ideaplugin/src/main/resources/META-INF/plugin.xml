@@ -8,12 +8,12 @@
 
    Turn this:
 <p align="center">
-  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/buttonhtml.png" height=500 />
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/master/docs/buttonhtml.png" height=500 />
 </p>
 
 Into this:
 <p align="center">
-  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/composebutton.png" height=500 />
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/master/docs/composebutton.png" height=500 />
 </p>
 
 ## Introduction / HOW TO USE
@@ -21,11 +21,11 @@ Into this:
 1) Put your cursor to the place where you want to insert the Compose code.
 2) Open the Plugin under Tools> HTML to Compose Web
  <p align="center">
-  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideatools.png" height=500 />
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/master/docs/ideatools.png" height=500 />
 </p>
 3) Add your HTML to press "Generate"
 <p align="center">
-  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/blob/master/docs/ideaWindow.png" height=500 />
+  <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/master/docs/ideaWindow.png" height=500 />
 </p>
 4) Your code is now inserted at your cursor.
 
