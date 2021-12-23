@@ -21,7 +21,7 @@ Into this:
 
 [![GitHub stars](https://img.shields.io/github/stars/Foso/HtmlToComposeWebConverter.svg?style=social&label=Star)](https://github.com/Foso/HtmlToComposeWebConverter) [![GitHub forks](https://img.shields.io/github/forks/Foso/HtmlToComposeWebConverter.svg?style=social&label=Fork)](https://github.com/Foso/HtmlToComposeWebConverter/fork) [![GitHub watchers](https://img.shields.io/github/watchers/Foso/HtmlToComposeWebConverter.svg?style=social&label=Watch)](https://github.com/Foso/HtmlToComposeWebConverter) [![Twitter Follow](https://img.shields.io/twitter/follow/jklingenberg_.svg?style=social)](https://twitter.com/jklingenberg_)
 
-## Introduction / HOW TO USE
+## Introduction / How to use
 
 1) Put your cursor to the place where you want to insert the Compose code.
 2) Open the Plugin under Tools> HTML to Compose Web
@@ -35,10 +35,10 @@ Into this:
 4) Your code is now inserted at your cursor.
 
 
-## What this plugin can't do:
+## What this plugin can't do (yet):
 * Convert JavaScript: 
 
- The <script> tag will be ignored, but Inline Javascript will be set without changes to the corresponding property. See the "button" code example above.
+ The <script> tag will be ignored, but inlined Javascript will be set without changes to the corresponding property. See the "button" code example above.
   
 * Convert style sheets: 
  
