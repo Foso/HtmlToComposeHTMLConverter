@@ -1,11 +1,39 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Document</title>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
-        <button name="button" type="button" style="margin: 16px; padding: 16px; background-color: darkblue; color: aliceblue;border-radius: 4px;font-size: 12px" onClick="alert('Hello World!')">Click Me!</button>
+.button1 {font-size: 10px;}
+.button2 {font-size: 12px;}
+.button3 {font-size: 16px;}
+.button4 {font-size: 20px;}
+.button5 {font-size: 24px;}
+</style>
+</head>
+<body>
 
-    </body>
-    </html>
+<h2>Button Sizes</h2>
+
+<p>Change the font size of a button with the font-size property:</p>
+
+<button class="button button1">10px</button>
+<button class="button button2">12px</button>
+<button class="button button3">16px</button>
+<button class="button button4">20px</button>
+<button class="button button5">24px</button>
+
+</body>
+</html>
+
+

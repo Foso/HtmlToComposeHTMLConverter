@@ -48,7 +48,13 @@ fun getMyNode(node: Node): MyNode {
                     TextAreaNode(node)
                 }
                 "script" -> {
-                    return UnsupportedNode()
+                    UnsupportedNode()
+                }
+                "title" -> {
+                    TitleNode(node)
+                }
+                "style" -> {
+                    StyleNode(node)
                 }
 
                 else -> {

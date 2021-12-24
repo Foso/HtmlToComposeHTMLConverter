@@ -6,7 +6,7 @@ class CFWTextNode(private val textNode: TextNode) : MyNode {
     override fun print(): String {
         return if (textNode.text().isNotBlank()) {
             val text = textNode.text().replace("\"", "\\\"")
-            ("Text(\"${text}\")\n")
+            "Text(\"" + text + "\")\n"
         } else {
             ""
         }

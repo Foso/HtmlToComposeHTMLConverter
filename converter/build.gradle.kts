@@ -17,6 +17,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jsoup:jsoup:1.14.3")
+    implementation("com.helger:ph-css:6.4.0")
 }
 
 tasks.test {

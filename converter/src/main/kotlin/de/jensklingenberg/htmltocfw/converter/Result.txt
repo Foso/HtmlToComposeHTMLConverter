@@ -1,16 +1,64 @@
-Button (attrs = {
-name("button")
-attr("type","button")
-style {
-margin(16.px)
-padding(16.px)
-property("background-color","darkblue")
-property("color","aliceblue")
-borderRadius(4.px)
-fontSize(12.px)
+object AppStylesheet : StyleSheet() {
+init {
+".button" style { property("background-color","#4CAF50")
+property("border","none")
+property("color","white")
+property("padding","15px 32px")
+textAlign("center")
+textDecoration("none")
+property("display","inline-block")
+property("margin","4px 2px")
+property("cursor","pointer")
 }
-attr("onClick","alert('Hello World!')")
-}){
-Text("Click Me!")
+".button1" style { property("font-size","10px")
+}
+".button2" style { property("font-size","12px")
+}
+".button3" style { property("font-size","16px")
+}
+".button4" style { property("font-size","20px")
+}
+".button5" style { property("font-size","24px")
+}
+}}
+Div{
+Style(AppStylesheet)
+H2 {
+Text("Button Sizes")
 
 }
+P {
+Text("Change the font size of a button with the font-size property:")
+
+}
+Button (attrs = {
+classes("button", "button1")
+}){
+Text("10px")
+
+}
+Button (attrs = {
+classes("button", "button2")
+}){
+Text("12px")
+
+}
+Button (attrs = {
+classes("button", "button3")
+}){
+Text("16px")
+
+}
+Button (attrs = {
+classes("button", "button4")
+}){
+Text("20px")
+
+}
+Button (attrs = {
+classes("button", "button5")
+}){
+Text("24px")
+
+}
+

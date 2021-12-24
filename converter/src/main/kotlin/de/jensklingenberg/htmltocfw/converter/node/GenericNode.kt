@@ -13,7 +13,6 @@ class GenericNode(private val element: Element) : MyNode {
             str += "($attrs)"
         }
 
-
         val childNodesText = element.childNodes().joinToString(separator = "") {
             getMyNode(it).print()
         }
