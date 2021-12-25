@@ -4,5 +4,4 @@ class EmptyNode : MyNode {
     override fun print(): String {
         return ""
     }
-
 }

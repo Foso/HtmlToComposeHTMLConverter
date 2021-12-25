@@ -5,11 +5,11 @@ import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
 class FormNode(private val element: Element) : MyNode {
-
+    val TAG = "Form"
     val ATTR_ACTION = "action"
 
     override fun print(): String {
-        var str = "Form ("
+        var str = "$TAG ("
         val actionValue = element.attributes().get(ATTR_ACTION)
         element.attributes().remove(ATTR_ACTION)
 

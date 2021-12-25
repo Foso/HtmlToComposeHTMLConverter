@@ -1,24 +1,22 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.getAttributesText
-import org.jsoup.nodes.Attribute
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Attributes
 
-class ImgNode(val element: Element) : MyNode {
+class ImgNode(val element: Attributes) : MyNode {
     val ATTR_ALT = "alt"
     val ATTR_SRC = "src"
+    val TAG = "Img"
 
     override fun print(): String {
 
-        var str = "Img ("
-        val altValue = element.attributes().get(ATTR_ALT)
-        element.attributes().remove(ATTR_ALT)
-        val srcValue = element.attributes().get(ATTR_SRC)
-        element.attributes().remove(ATTR_SRC)
+        var str = "$TAG ("
+        val altValue = element.get(ATTR_ALT)
+        element.remove(ATTR_ALT)
+        val srcValue = element.get(ATTR_SRC)
+        element.remove(ATTR_SRC)
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
-
-        val attrText = getAttributesText(attributesList)
+        val attrText = getAttributesText(element.asList())
         str += (attrText)
         if (attrText.isNotBlank()) {
             str += (", ")

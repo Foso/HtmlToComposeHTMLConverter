@@ -1,19 +1,18 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.getAttributesText
-import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
 class LabelNode(private val element: Element) : MyNode {
+    val ATTR_FOR = "for"
+    val TAG = "Label"
 
     override fun print(): String {
-        var str = "Label ("
-        val forValue = element.attributes().get("for")
-        element.attributes().remove("for")
+        var str = "$TAG ("
+        val forValue = element.attributes().get(ATTR_FOR)
+        element.attributes().remove(ATTR_FOR)
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
-
-        val attrText = getAttributesText(attributesList)
+        val attrText = getAttributesText(element.attributes().asList())
         str += attrText
 
         if (forValue.isNotBlank()) {

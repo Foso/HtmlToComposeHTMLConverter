@@ -5,9 +5,9 @@ import org.jsoup.nodes.Element
 
 class PathNode(private val element: Element) : MyNode {
     val ATTR_D = "d"
-
+    val TAG = "Path"
     override fun print(): String {
-        var str = "Path ("
+        var str = "$TAG ("
         val dValue = element.attributes().get(ATTR_D)
         element.attributes().remove(ATTR_D)
 

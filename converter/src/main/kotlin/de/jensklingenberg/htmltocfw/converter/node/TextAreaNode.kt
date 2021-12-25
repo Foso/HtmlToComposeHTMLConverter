@@ -5,9 +5,9 @@ import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
 
 class TextAreaNode(private val element: Element) : MyNode {
-
+    val TAG = "TextArea"
     override fun print(): String {
-        var str = "TextArea("
+        var str = "$TAG ("
         str += getAttributesText(element.attributes().asList())
 
         if (element.childNodes().isNotEmpty() && element.childNodes().first() is TextNode) {

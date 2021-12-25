@@ -5,12 +5,12 @@ import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
 class ANode(private val element: Element) : MyNode {
-
+    val TAG = "A"
     val ATTR_HREF = "href"
 
     override fun print(): String {
 
-        var str = "A ("
+        var str = "$TAG ("
         val hrefValue = element.attributes().get(ATTR_HREF)
         element.attributes().remove(ATTR_HREF)
 

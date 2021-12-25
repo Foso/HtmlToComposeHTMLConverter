@@ -4,27 +4,21 @@ import com.helger.commons.collection.impl.ICommonsList
 import com.helger.css.ECSSVersion
 import com.helger.css.decl.CSSStyleRule
 import com.helger.css.reader.CSSReader
-import de.jensklingenberg.htmltocfw.converter.CFWAttributeNames
+import de.jensklingenberg.htmltocfw.converter.getStyleProperties
 import org.jsoup.nodes.Element
 import java.nio.charset.StandardCharsets
-
 
 
 fun parseStyleNodes(allStyleRules: ICommonsList<CSSStyleRule>?): String {
     var str = ""
     allStyleRules?.forEach {
-        val styleName = it.allSelectors[0].asCSSString
+        val styleName = it.allSelectors.joinToString { it.asCSSString }
         str += "\"$styleName\" style { \n"
         it.allDeclarations.forEach {
             val propName = it.property
-            str += when (val test = CFWAttributeNames.values().find { it.htmlAttrName == propName }) {
-                CFWAttributeNames.TEXTDECORATION, CFWAttributeNames.TEXTALIGN, CFWAttributeNames.BACKGROUNDIMAGE, CFWAttributeNames.FONTFAMILY, CFWAttributeNames.FONT -> {
-                    "${test.cfwAttrName}(\"${it.expressionAsCSSString}\")"
-                }
-                else->{
-                    "property(\"" + it.property + "\",\"" + it.expressionAsCSSString + "\")"
-                }
-            }
+            val propValue = it.expressionAsCSSString
+
+            str += getStyleProperties(propName,propValue)
             str += "\n"
         }
         str += "}\n"

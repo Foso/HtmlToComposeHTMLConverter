@@ -6,10 +6,10 @@ import org.jsoup.nodes.Element
 
 class OptionNode(private val element: Element) : MyNode {
     val ATTR_VALUE = "value"
-
+    val TAG = "Option"
     override fun print(): String {
 
-        var str = "Option ("
+        var str = "$TAG ("
         val valueValue = element.attributes().get(ATTR_VALUE)
         element.attributes().remove(ATTR_VALUE)
 

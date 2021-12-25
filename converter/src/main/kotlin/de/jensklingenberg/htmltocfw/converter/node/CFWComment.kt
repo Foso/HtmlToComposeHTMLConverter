@@ -4,7 +4,7 @@ import org.jsoup.nodes.Comment
 
 class CFWComment(private val comment: Comment) : MyNode {
     override fun print(): String {
-        return ("//" + comment.data)
+        return ("//" + comment.data+"\n")
     }
 
 }

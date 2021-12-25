@@ -27,10 +27,10 @@ fun getMyNode(node: Node): MyNode {
                     FormNode(node)
                 }
                 "img" -> {
-                    ImgNode(node)
+                    ImgNode(node.attributes())
                 }
                 "input" -> {
-                    InputNode(node)
+                    InputNode(node.attributes())
                 }
                 "label" -> {
                     LabelNode(node)

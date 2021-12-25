@@ -1,56 +1,33 @@
 object AppStylesheet : StyleSheet() {
 init {
-"*" style { 
-property("box-sizing","border-box")
-}
-".topnav" style { 
-property("overflow","hidden")
-property("background-color","#333")
-}
-".topnav a" style { 
-property("float","left")
-property("display","block")
-property("color","#f2f2f2")
-textAlign("center")
-property("padding","14px 16px")
-textDecoration("none")
-}
-".topnav a:hover" style { 
-property("background-color","#ddd")
-property("color","black")
-}
-media("screen and (max-width:600px)") {
-".topnav a" style { 
-property("float","none")
-property("width","100%")
+media("screen and (max-width:900px) and (min-width:600px)") {
+"div.example" style { 
+fontSize(50.px)
+padding(50.px)
+property("border","8px solid black")
+property("background","yellow")
 }
 }
 }}
 @Composable fun HtmlComposable(){
 Style(AppStylesheet)
 H2 {
-Text("Responsive navigation menu")
-
-}
-P {
-Text("Resize the browser window to see the effect: When the screen is less than 600px, the navigation menu will be displayed vertically instead of horizontally.")
+Text("Change the appearance of DIV on different screen sizes")
 
 }
 Div (attrs = {
-classes("topnav")
+classes("example")
 }){
-A (href = "#"){
-Text("Link")
+Text("Example DIV.")
 
 }
-A (href = "#"){
-Text("Link")
+P {
+Text("When the browser's width is between 600 and 900px OR above 1100px, change the appearance of DIV. ")
+Strong {
+Text("Resize the browser window to see the effect")
 
 }
-A (href = "#"){
-Text("Link")
-
-}
+Text(".")
 
 }
 }

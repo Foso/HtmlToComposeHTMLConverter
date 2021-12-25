@@ -7,10 +7,10 @@ import org.jsoup.nodes.Element
 class OptGroupNode(private val element: Element) : MyNode {
 
     val ATTR_LABEL = "label"
-
+    val TAG = "OptGroup"
     override fun print(): String {
 
-        var str = "OptGroup ("
+        var str = "$TAG ("
         val hasSrc = element.attributes().get(ATTR_LABEL)
         element.attributes().remove(ATTR_LABEL)
 
