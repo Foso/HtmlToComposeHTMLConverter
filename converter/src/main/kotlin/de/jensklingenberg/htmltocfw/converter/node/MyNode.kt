@@ -35,6 +35,9 @@ fun getMyNode(node: Node): MyNode {
                 "label" -> {
                     LabelNode(node)
                 }
+                "meta" ->{
+                    EmptyNode()
+                }
                 "option" -> {
                     OptionNode(node)
                 }
@@ -48,7 +51,7 @@ fun getMyNode(node: Node): MyNode {
                     TextAreaNode(node)
                 }
                 "script" -> {
-                    UnsupportedNode()
+                    EmptyNode()
                 }
                 "title" -> {
                     TitleNode(node)
@@ -64,7 +67,7 @@ fun getMyNode(node: Node): MyNode {
         }
         else -> {
             println("Not found: ${node.nodeName()}")
-            return UnsupportedNode()
+            return EmptyNode()
         }
 
     }

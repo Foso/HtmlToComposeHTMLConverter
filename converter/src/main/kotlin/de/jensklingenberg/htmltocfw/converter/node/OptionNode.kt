@@ -5,12 +5,13 @@ import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
 class OptionNode(private val element: Element) : MyNode {
+    val ATTR_VALUE = "value"
 
     override fun print(): String {
 
         var str = "Option ("
-        val valueValue = element.attributes().get("value")
-        element.attributes().remove("value")
+        val valueValue = element.attributes().get(ATTR_VALUE)
+        element.attributes().remove(ATTR_VALUE)
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 

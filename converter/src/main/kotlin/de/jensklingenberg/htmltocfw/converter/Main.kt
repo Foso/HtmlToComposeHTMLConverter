@@ -18,24 +18,24 @@ fun main() {
 }
 
 fun htmlToCompose(html: String): String {
-    val  parser = Parser.htmlParser();
+    val parser = Parser.htmlParser();
     parser.settings(ParseSettings(true, true))
-    val doc = parser.parseInput(html,"")
+    val doc = parser.parseInput(html, "")
 
-    val head =  doc.head().childNodes().joinToString(separator = "") {
+    val head = doc.head().childNodes().joinToString(separator = "") {
         getMyNode(it).print()
     }
 
-    val hasStyle = doc.head().allElements.any { it.tag().toString()=="style" }
+    val hasStyle = doc.head().allElements.any { it.tag().toString() == "style" }
 
 
-    val body =  doc.body().childNodes().joinToString(separator = "") {
+    val body = doc.body().childNodes().joinToString(separator = "") {
         getMyNode(it).print()
     }
 
-    val wrappedBody = if(hasStyle){
-        "Div{\nStyle(AppStylesheet)\n" + body + "\n"
-    }else{
+    val wrappedBody = if (hasStyle) {
+        "@Composable fun HtmlComposable(){\nStyle(AppStylesheet)\n" + body + "}\n"
+    } else {
         body
     }
 

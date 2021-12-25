@@ -1,64 +1,56 @@
 object AppStylesheet : StyleSheet() {
 init {
-".button" style { property("background-color","#4CAF50")
-property("border","none")
-property("color","white")
-property("padding","15px 32px")
+"*" style { 
+property("box-sizing","border-box")
+}
+".topnav" style { 
+property("overflow","hidden")
+property("background-color","#333")
+}
+".topnav a" style { 
+property("float","left")
+property("display","block")
+property("color","#f2f2f2")
 textAlign("center")
+property("padding","14px 16px")
 textDecoration("none")
-property("display","inline-block")
-property("margin","4px 2px")
-property("cursor","pointer")
 }
-".button1" style { property("font-size","10px")
+".topnav a:hover" style { 
+property("background-color","#ddd")
+property("color","black")
 }
-".button2" style { property("font-size","12px")
+media("screen and (max-width:600px)") {
+".topnav a" style { 
+property("float","none")
+property("width","100%")
 }
-".button3" style { property("font-size","16px")
-}
-".button4" style { property("font-size","20px")
-}
-".button5" style { property("font-size","24px")
 }
 }}
-Div{
+@Composable fun HtmlComposable(){
 Style(AppStylesheet)
 H2 {
-Text("Button Sizes")
+Text("Responsive navigation menu")
 
 }
 P {
-Text("Change the font size of a button with the font-size property:")
+Text("Resize the browser window to see the effect: When the screen is less than 600px, the navigation menu will be displayed vertically instead of horizontally.")
 
 }
-Button (attrs = {
-classes("button", "button1")
+Div (attrs = {
+classes("topnav")
 }){
-Text("10px")
+A (href = "#"){
+Text("Link")
 
 }
-Button (attrs = {
-classes("button", "button2")
-}){
-Text("12px")
+A (href = "#"){
+Text("Link")
 
 }
-Button (attrs = {
-classes("button", "button3")
-}){
-Text("16px")
-
-}
-Button (attrs = {
-classes("button", "button4")
-}){
-Text("20px")
-
-}
-Button (attrs = {
-classes("button", "button5")
-}){
-Text("24px")
+A (href = "#"){
+Text("Link")
 
 }
 
+}
+}

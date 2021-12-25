@@ -6,10 +6,12 @@ import org.jsoup.nodes.Element
 
 class FormNode(private val element: Element) : MyNode {
 
+    val ATTR_ACTION = "action"
+
     override fun print(): String {
         var str = "Form ("
-        val actionValue = element.attributes().get("action")
-        element.attributes().remove("action")
+        val actionValue = element.attributes().get(ATTR_ACTION)
+        element.attributes().remove(ATTR_ACTION)
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 

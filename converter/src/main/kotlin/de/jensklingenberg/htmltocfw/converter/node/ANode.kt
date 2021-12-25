@@ -6,11 +6,13 @@ import org.jsoup.nodes.Element
 
 class ANode(private val element: Element) : MyNode {
 
+    val ATTR_HREF = "href"
+
     override fun print(): String {
 
         var str = "A ("
-        val hrefValue = element.attributes().get("href")
-        element.attributes().remove("href")
+        val hrefValue = element.attributes().get(ATTR_HREF)
+        element.attributes().remove(ATTR_HREF)
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 

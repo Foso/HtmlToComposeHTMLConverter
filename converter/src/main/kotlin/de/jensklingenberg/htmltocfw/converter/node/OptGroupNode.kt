@@ -6,11 +6,13 @@ import org.jsoup.nodes.Element
 
 class OptGroupNode(private val element: Element) : MyNode {
 
+    val ATTR_LABEL = "label"
+
     override fun print(): String {
 
         var str = "OptGroup ("
-        val hasSrc = element.attributes().get("label")
-        element.attributes().remove("label")
+        val hasSrc = element.attributes().get(ATTR_LABEL)
+        element.attributes().remove(ATTR_LABEL)
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 

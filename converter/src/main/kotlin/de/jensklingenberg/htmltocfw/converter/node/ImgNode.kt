@@ -5,14 +5,16 @@ import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
 class ImgNode(val element: Element) : MyNode {
+    val ATTR_ALT = "alt"
+    val ATTR_SRC = "src"
 
     override fun print(): String {
 
         var str = "Img ("
-        val altValue = element.attributes().get("alt")
-        element.attributes().remove("alt")
-        val srcValue = element.attributes().get("src")
-        element.attributes().remove("src")
+        val altValue = element.attributes().get(ATTR_ALT)
+        element.attributes().remove(ATTR_ALT)
+        val srcValue = element.attributes().get(ATTR_SRC)
+        element.attributes().remove(ATTR_SRC)
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 

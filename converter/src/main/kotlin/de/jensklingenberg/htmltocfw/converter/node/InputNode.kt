@@ -4,11 +4,11 @@ import de.jensklingenberg.htmltocfw.converter.getAttributesText
 import org.jsoup.nodes.Element
 
 class InputNode(private val element: Element) : MyNode {
-
+    val ATTR_TYPE = "type"
     override fun print(): String {
         var str = "Input ("
-        val hasType = element.attributes().get("type")
-        element.attributes().remove("type")
+        val hasType = element.attributes().get(ATTR_TYPE)
+        element.attributes().remove(ATTR_TYPE)
         val attrText = getAttributesText(element.attributes().asList())
         str += attrText
 
