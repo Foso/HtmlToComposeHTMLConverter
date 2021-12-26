@@ -4,9 +4,13 @@ import org.jsoup.nodes.Attribute
 
 
 fun getStyleProperties(propName: String, propValue: String): String {
-    return when (val test = CFWAttributeNames.values().find { it.htmlAttrName == propName }) {
 
-        CFWAttributeNames.HEIGHT, CFWAttributeNames.WIDTH, CFWAttributeNames.MARGIN, CFWAttributeNames.PADDING, CFWAttributeNames.FONTSIZE, CFWAttributeNames.BORDERRADIUS -> {
+    return when (propName) {
+
+        "background-image" -> {
+            "backgroundImage(${propValue})"
+        }
+        "border-radius" -> {
             val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
 
             if (unitType == null) {
@@ -14,32 +18,63 @@ fun getStyleProperties(propName: String, propValue: String): String {
             } else {
 
                 val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
-                "${test.cfwAttrName}(${newValue})"
+                "borderRadius(${newValue})"
             }
         }
-
-        CFWAttributeNames.DISPLAY -> {
+        "box-sizing" -> {
+            "boxSizing(\"${propValue}\")"
+        }
+        "display" -> {
             "display(DisplayStyle.${propValue.capitalize()})"
         }
-
-        CFWAttributeNames.FLEXDIRECTION -> {
+        "flex-direction" -> {
             "flexDirection(FlexDirection.${propValue.capitalize()})"
         }
-
-        CFWAttributeNames.FLEXWRAP -> {
+        "flex-wrap" -> {
             "flexWrap(FlexWrap.${propValue.capitalize()})"
         }
+        "font-family" -> {
+            "fontFamily(\"${propValue}\")"
+        }
+        "font-size" -> {
+            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
 
-        CFWAttributeNames.BOXSIZING, CFWAttributeNames.TEXTDECORATION, CFWAttributeNames.TEXTALIGN, CFWAttributeNames.BACKGROUNDIMAGE, CFWAttributeNames.FONTFAMILY, CFWAttributeNames.FONT -> {
-            "${test.cfwAttrName}(\"${propValue}\")"
+            if (unitType == null) {
+                "property(\"$propName\",\"${propValue}\")"
+            } else {
+                val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
+                "fontSize(${newValue})"
+            }
+        }
+        "text-align" -> {
+            "textAlign(\"${propValue}\")"
+        }
+
+        "text-decoration" -> {
+            "textDecoration(\"${propValue}\")"
+        }
+        "height", "width", "font", "margin", "padding" -> {
+            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
+
+            if (unitType == null) {
+                "property(\"$propName\",\"${propValue}\")"
+            } else {
+
+                val newValue =
+                    propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
+                "$propName(${newValue})"
+            }
         }
         else -> {
             "property(\"$propName\",\"${propValue}\")"
         }
     }
+
 }
 
-fun getStyleText(attribute: Attribute): String {
+
+
+fun parseStyleText(attribute: Attribute): String {
     var str = "style {\n"
 
     //Find better way to parse style

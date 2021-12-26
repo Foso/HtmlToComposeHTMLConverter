@@ -34,13 +34,13 @@ fun htmlToCompose(html: String): String {
     }
 
     val wrappedBody = if (hasStyle) {
-        "@Composable fun HtmlComposable(){\nStyle(AppStylesheet)\n" + body + "}\n"
+        "Style(appStylesheet())\n$body"
     } else {
         body
     }
 
 
-    return head + wrappedBody
+    return "@Composable\nfun HtmlComposable(){\n $head \n$wrappedBody}\n"
 }
 
 

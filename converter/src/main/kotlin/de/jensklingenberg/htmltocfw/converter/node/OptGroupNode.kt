@@ -1,9 +1,12 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
-
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.OptGroup]
+ */
 class OptGroupNode(private val element: Element) : MyNode {
 
     val ATTR_LABEL = "label"
@@ -16,7 +19,7 @@ class OptGroupNode(private val element: Element) : MyNode {
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
-        val attrText = getAttributesText(attributesList)
+        val attrText = parseAttributes(attributesList)
         str += (attrText)
 
         if (attrText.isNotBlank()) {

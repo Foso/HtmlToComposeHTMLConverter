@@ -3,7 +3,7 @@ package de.jensklingenberg.htmltocfw.converter
 import org.jsoup.nodes.Attribute
 
 
-fun getAttributesText(attributesList: List<Attribute>): String {
+fun parseAttributes(attributesList: List<Attribute>): String {
 
     var str = ""
     attributesList.forEachIndexed { index, attribute ->
@@ -19,7 +19,7 @@ fun getAttributesText(attributesList: List<Attribute>): String {
                 "draggable(Draggable.${attribute.value.capitalize()})"
             }
             "style" -> {
-                getStyleText(attribute)
+                parseStyleText(attribute)
             }
             "required", "hidden", "selected", "disabled" -> {
                 attribute.key + "()"

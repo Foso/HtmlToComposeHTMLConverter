@@ -9,7 +9,7 @@ import org.jsoup.nodes.Element
 import java.nio.charset.StandardCharsets
 
 
-fun parseStyleNodes(allStyleRules: ICommonsList<CSSStyleRule>?): String {
+fun parseStyleRules(allStyleRules: ICommonsList<CSSStyleRule>?): String {
     var str = ""
     allStyleRules?.forEach {
         val styleName = it.allSelectors.joinToString { it.asCSSString }
@@ -29,17 +29,15 @@ fun parseStyleNodes(allStyleRules: ICommonsList<CSSStyleRule>?): String {
 class StyleNode(private val element: Element) : MyNode {
 
     override fun print(): String {
-        var str = "object AppStylesheet : StyleSheet() {\n"
+        var str = "fun appStylesheet() = object : StyleSheet() {\n"
         str += "init {\n"
         val aCSS = CSSReader.readFromString(element.data(), StandardCharsets.UTF_8, ECSSVersion.CSS30);
 
-        str += parseStyleNodes(aCSS?.allStyleRules)
+        str += parseStyleRules(aCSS?.allStyleRules)
 
         aCSS?.allMediaRules?.forEach {
             val media = it.allMediaQueries.first?.asCSSString
-
-            str += "media(\"$media\") {\n" + parseStyleNodes(it?.allStyleRules) + "}\n"
-            it
+            str += "media(\"$media\") {\n" + parseStyleRules(it?.allStyleRules) + "}\n"
         }
         str += "}}\n"
         return str

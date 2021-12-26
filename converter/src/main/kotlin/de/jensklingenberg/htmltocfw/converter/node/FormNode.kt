@@ -1,9 +1,13 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.Form]
+ */
 class FormNode(private val element: Element) : MyNode {
     val TAG = "Form"
     val ATTR_ACTION = "action"
@@ -13,9 +17,7 @@ class FormNode(private val element: Element) : MyNode {
         val actionValue = element.attributes().get(ATTR_ACTION)
         element.attributes().remove(ATTR_ACTION)
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
-
-        val attrText = getAttributesText(attributesList)
+        val attrText = parseAttributes(element.attributes().asList())
         str += attrText
 
         if (actionValue.isNotBlank()) {

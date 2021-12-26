@@ -1,9 +1,13 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Attribute
 import org.jsoup.nodes.Element
 
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.A]
+ */
 class ANode(private val element: Element) : MyNode {
     val TAG = "A"
     val ATTR_HREF = "href"
@@ -16,7 +20,7 @@ class ANode(private val element: Element) : MyNode {
 
         val attributesList: MutableList<Attribute> = element.attributes().asList()
 
-        val attrText = getAttributesText(attributesList)
+        val attrText = parseAttributes(attributesList)
         str += attrText
 
         if (hrefValue.isNotBlank()) {

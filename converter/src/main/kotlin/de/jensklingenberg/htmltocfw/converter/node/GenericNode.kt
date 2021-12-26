@@ -1,6 +1,6 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Element
 
 class GenericNode(private val element: Element) : MyNode {
@@ -8,7 +8,7 @@ class GenericNode(private val element: Element) : MyNode {
     override fun print(): String {
         var str = element.tag().toString().capitalize() + " "
 
-        val attrs = getAttributesText(element.attributes().asList())
+        val attrs = parseAttributes(element.attributes().asList())
         if (attrs.isNotBlank()) {
             str += "($attrs)"
         }

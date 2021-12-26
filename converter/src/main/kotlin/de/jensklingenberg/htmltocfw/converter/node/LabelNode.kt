@@ -1,8 +1,12 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Element
 
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.Label]
+ */
 class LabelNode(private val element: Element) : MyNode {
     val ATTR_FOR = "for"
     val TAG = "Label"
@@ -12,7 +16,7 @@ class LabelNode(private val element: Element) : MyNode {
         val forValue = element.attributes().get(ATTR_FOR)
         element.attributes().remove(ATTR_FOR)
 
-        val attrText = getAttributesText(element.attributes().asList())
+        val attrText = parseAttributes(element.attributes().asList())
         str += attrText
 
         if (forValue.isNotBlank()) {

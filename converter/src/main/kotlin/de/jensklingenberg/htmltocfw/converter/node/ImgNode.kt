@@ -1,8 +1,12 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Attributes
 
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.Img]
+ */
 class ImgNode(val element: Attributes) : MyNode {
     val ATTR_ALT = "alt"
     val ATTR_SRC = "src"
@@ -16,7 +20,7 @@ class ImgNode(val element: Attributes) : MyNode {
         val srcValue = element.get(ATTR_SRC)
         element.remove(ATTR_SRC)
 
-        val attrText = getAttributesText(element.asList())
+        val attrText = parseAttributes(element.asList())
         str += (attrText)
         if (attrText.isNotBlank()) {
             str += (", ")
