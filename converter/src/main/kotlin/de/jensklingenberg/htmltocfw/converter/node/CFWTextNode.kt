@@ -7,7 +7,7 @@ import org.jsoup.nodes.TextNode
  * [org.jetbrains.compose.web.dom.Text]
  */
 class CFWTextNode(private val textNode: TextNode) : MyNode {
-    override fun print(): String {
+    override fun toString(): String {
         return if (textNode.text().isNotBlank()) {
             val text = textNode.text().replace("\"", "\\\"")
             "Text(\"" + text + "\")\n"

@@ -7,15 +7,15 @@ import org.jsoup.nodes.Attributes
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.Input]
  */
-class InputNode(private val attributes: Attributes) : MyNode {
+class InputNode(private val htmlAttributes: Attributes) : MyNode {
     val ATTR_TYPE = "type"
     val TAG = "Input"
 
-    override fun print(): String {
+    override fun toString(): String {
         var str = "$TAG ("
-        val hasType = attributes.get(ATTR_TYPE)
-        attributes.remove(ATTR_TYPE)
-        val attrText = parseAttributes(attributes.asList())
+        val hasType = htmlAttributes.get(ATTR_TYPE)
+        htmlAttributes.remove(ATTR_TYPE)
+        val attrText = parseAttributes(htmlAttributes.asList())
         str += attrText
 
         if (hasType.isNotBlank()) {

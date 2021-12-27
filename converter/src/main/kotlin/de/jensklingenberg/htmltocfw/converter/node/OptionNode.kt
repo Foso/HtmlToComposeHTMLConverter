@@ -1,35 +1,33 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
-import org.jsoup.nodes.Attribute
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Attributes
+import org.jsoup.nodes.Node
 
 /**
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.Option]
  */
-class OptionNode(private val element: Element) : MyNode {
+class OptionNode(private val attributes: Attributes, val childNodes: List<Node>) : MyNode {
     val ATTR_VALUE = "value"
     val TAG = "Option"
-    override fun print(): String {
+
+    override fun toString(): String {
 
         var str = "$TAG ("
-        val valueValue = element.attributes().get(ATTR_VALUE)
-        element.attributes().remove(ATTR_VALUE)
+        val valueValue = attributes.get(ATTR_VALUE)
+        attributes.remove(ATTR_VALUE)
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
-
-        val attrText = parseAttributes(attributesList)
-        str += (attrText)
+        val attrText = parseAttributes(attributes.asList())
+        str += attrText
 
         if (attrText.isNotBlank()) {
             str += (",")
         }
-        str += ("value = \"${valueValue}\"")
-        str += (")")
+        str += ("value = \"${valueValue}\"") + ")"
 
-        val childNodesText = element.childNodes().joinToString(separator = "") {
-            getMyNode(it).print()
+        val childNodesText = childNodes.joinToString(separator = "") {
+            getMyNode(it).toString()
         }
 
         str += "{"

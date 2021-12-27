@@ -18,19 +18,20 @@ fun main() {
 }
 
 fun htmlToCompose(html: String): String {
+
     val parser = Parser.htmlParser();
     parser.settings(ParseSettings(true, true))
     val doc = parser.parseInput(html, "")
 
     val head = doc.head().childNodes().joinToString(separator = "") {
-        getMyNode(it).print()
+        getMyNode(it).toString()
     }
 
     val hasStyle = doc.head().allElements.any { it.tag().toString() == "style" }
 
 
     val body = doc.body().childNodes().joinToString(separator = "") {
-        getMyNode(it).print()
+        getMyNode(it).toString()
     }
 
     val wrappedBody = if (hasStyle) {
@@ -40,17 +41,8 @@ fun htmlToCompose(html: String): String {
     }
 
 
-    return "@Composable\nfun HtmlComposable(){\n $head \n$wrappedBody}\n"
+    return "@Composable\nfun GeneratedComposable(){\n $head \n$wrappedBody}\n"
 }
 
-
-val String.isNumber: Boolean
-    get() {
-        return this.toIntOrNull() != null
-    }
-
-fun formatStringValue(text: String): String {
-    return "\"${text}\""
-}
 
 

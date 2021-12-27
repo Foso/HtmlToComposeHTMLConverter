@@ -2,7 +2,9 @@ package de.jensklingenberg.htmltocfw.converter
 
 import org.jsoup.nodes.Attribute
 
-
+/**
+ *
+ */
 fun parseAttributes(attributesList: List<Attribute>): String {
 
     var str = ""

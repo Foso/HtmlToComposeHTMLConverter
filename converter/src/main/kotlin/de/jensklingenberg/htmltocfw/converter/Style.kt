@@ -2,7 +2,9 @@ package de.jensklingenberg.htmltocfw.converter
 
 import org.jsoup.nodes.Attribute
 
-
+/**
+ *
+ */
 fun getStyleProperties(propName: String, propValue: String): String {
 
     return when (propName) {

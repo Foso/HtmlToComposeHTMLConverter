@@ -5,7 +5,7 @@ import org.jsoup.nodes.Element
 
 class GenericNode(private val element: Element) : MyNode {
 
-    override fun print(): String {
+    override fun toString(): String {
         var str = element.tag().toString().capitalize() + " "
 
         val attrs = parseAttributes(element.attributes().asList())
@@ -14,7 +14,7 @@ class GenericNode(private val element: Element) : MyNode {
         }
 
         val childNodesText = element.childNodes().joinToString(separator = "") {
-            getMyNode(it).print()
+            getMyNode(it).toString()
         }
 
         str += "{"

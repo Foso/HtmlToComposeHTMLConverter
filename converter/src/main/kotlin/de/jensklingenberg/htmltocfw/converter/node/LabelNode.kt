@@ -1,22 +1,23 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Attributes
+import org.jsoup.nodes.Node
 
 /**
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.Label]
  */
-class LabelNode(private val element: Element) : MyNode {
-    val ATTR_FOR = "for"
-    val TAG = "Label"
+class LabelNode(private val htmlAttributes: Attributes, val childNodes: List<Node>) : MyNode {
+    private val ATTR_FOR = "for"
+    private val TAG = "Label"
 
-    override fun print(): String {
+    override fun toString(): String {
         var str = "$TAG ("
-        val forValue = element.attributes().get(ATTR_FOR)
-        element.attributes().remove(ATTR_FOR)
+        val forValue = htmlAttributes.get(ATTR_FOR)
+        htmlAttributes.remove(ATTR_FOR)
 
-        val attrText = parseAttributes(element.attributes().asList())
+        val attrText = parseAttributes(htmlAttributes.asList())
         str += attrText
 
         if (forValue.isNotBlank()) {
@@ -24,11 +25,10 @@ class LabelNode(private val element: Element) : MyNode {
                 str += (", ")
             }
         }
-        str += ("forId = \"${forValue}\"")
-        str += (")")
+        str += ("forId = \"${forValue}\"") + ")"
 
-        val childNodesText = element.childNodes().joinToString(separator = "") {
-            getMyNode(it).print()
+        val childNodesText = childNodes.joinToString(separator = "") {
+            getMyNode(it).toString()
         }
 
         str += "{"

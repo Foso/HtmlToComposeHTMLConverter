@@ -6,7 +6,7 @@ import org.jsoup.nodes.Node
 import org.jsoup.nodes.TextNode
 
 interface MyNode {
-    fun print(): String
+
 }
 
 
@@ -21,10 +21,10 @@ fun getMyNode(node: Node): MyNode {
         is Element -> {
             when (node.tagName()) {
                 "a" -> {
-                    ANode(node)
+                    ANode(node.attributes(), node.childNodes())
                 }
                 "form" -> {
-                    FormNode(node)
+                    FormNode(node.attributes(), node.childNodes())
                 }
                 "img" -> {
                     ImgNode(node.attributes())
@@ -33,28 +33,28 @@ fun getMyNode(node: Node): MyNode {
                     InputNode(node.attributes())
                 }
                 "label" -> {
-                    LabelNode(node)
+                    LabelNode(node.attributes(), node.childNodes())
                 }
                 "meta" ->{
                     EmptyNode()
                 }
                 "option" -> {
-                    OptionNode(node)
+                    OptionNode(node.attributes(), node.childNodes())
                 }
                 "optgroup" -> {
-                    OptGroupNode(node)
+                    OptGroupNode(node.attributes(), node.childNodes())
                 }
                 "path" -> {
-                    PathNode(node)
+                    PathNode(node.attributes())
                 }
                 "textarea" -> {
-                    TextAreaNode(node)
+                    TextAreaNode(node.attributes(), node.childNodes())
                 }
                 "script" -> {
                     EmptyNode()
                 }
                 "title" -> {
-                    TitleNode(node)
+                    TitleNode(node.text())
                 }
                 "style" -> {
                     StyleNode(node)

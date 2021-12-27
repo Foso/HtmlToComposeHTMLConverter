@@ -1,35 +1,33 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
-import org.jsoup.nodes.Attribute
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Attributes
+import org.jsoup.nodes.Node
+
 /**
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.OptGroup]
  */
-class OptGroupNode(private val element: Element) : MyNode {
+class OptGroupNode(private val htmlAttributes: Attributes, val childNodes: List<Node>) : MyNode {
 
     val ATTR_LABEL = "label"
     val TAG = "OptGroup"
-    override fun print(): String {
+    override fun toString(): String {
 
         var str = "$TAG ("
-        val hasSrc = element.attributes().get(ATTR_LABEL)
-        element.attributes().remove(ATTR_LABEL)
+        val hasSrc = htmlAttributes.get(ATTR_LABEL)
+        htmlAttributes.remove(ATTR_LABEL)
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
-
-        val attrText = parseAttributes(attributesList)
+        val attrText = parseAttributes(htmlAttributes.asList())
         str += (attrText)
 
         if (attrText.isNotBlank()) {
             str += (",")
         }
-        str += ("label = \"${hasSrc}\"")
-        str += (")")
+        str += "label = \"${hasSrc}\"" + ")"
 
-        val childNodesText = element.childNodes().joinToString(separator = "") {
-            getMyNode(it).print()
+        val childNodesText = childNodes.joinToString(separator = "") {
+            getMyNode(it).toString()
         }
 
         str += "{"
@@ -40,7 +38,7 @@ class OptGroupNode(private val element: Element) : MyNode {
         if (childNodesText.isNotBlank()) {
             str += "\n"
         }
-        str += ("}\n")
+        str += "}\n"
         return str
     }
 

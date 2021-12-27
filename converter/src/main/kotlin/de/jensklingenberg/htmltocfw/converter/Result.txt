@@ -1,5 +1,5 @@
 @Composable
-fun HtmlComposable(){
+fun GeneratedComposable(){
  document.title="Page Title"
 fun appStylesheet() = object : StyleSheet() {
 init {

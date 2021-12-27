@@ -1,10 +1,8 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import org.jsoup.nodes.Element
+class TitleNode(private val titleText: String) : MyNode {
 
-class TitleNode(private val element: Element) : MyNode {
-
-    override fun print(): String {
-        return "document.title=\"${this.element.text()}\"\n"
+    override fun toString(): String {
+        return "document.title=\"${titleText}\"\n"
     }
 }

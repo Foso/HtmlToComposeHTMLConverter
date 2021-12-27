@@ -8,17 +8,19 @@ import de.jensklingenberg.htmltocfw.converter.getStyleProperties
 import org.jsoup.nodes.Element
 import java.nio.charset.StandardCharsets
 
-
-fun parseStyleRules(allStyleRules: ICommonsList<CSSStyleRule>?): String {
+/**
+ *
+ */
+fun parseStyleRules(allStyleRules: ICommonsList<CSSStyleRule>): String {
     var str = ""
-    allStyleRules?.forEach {
-        val styleName = it.allSelectors.joinToString { it.asCSSString }
+    allStyleRules.forEach { styleRule ->
+        val styleName = styleRule.allSelectors.joinToString { it.asCSSString }
         str += "\"$styleName\" style { \n"
-        it.allDeclarations.forEach {
-            val propName = it.property
-            val propValue = it.expressionAsCSSString
+        styleRule.allDeclarations.forEach { declaration ->
+            val propName = declaration.property
+            val propValue = declaration.expressionAsCSSString
 
-            str += getStyleProperties(propName,propValue)
+            str += getStyleProperties(propName, propValue)
             str += "\n"
         }
         str += "}\n"
@@ -26,18 +28,24 @@ fun parseStyleRules(allStyleRules: ICommonsList<CSSStyleRule>?): String {
     return str
 }
 
+/**
+ * This will transform the style tag to a StyleSheet
+ */
 class StyleNode(private val element: Element) : MyNode {
 
-    override fun print(): String {
-        var str = "fun appStylesheet() = object : StyleSheet() {\n"
-        str += "init {\n"
+    override fun toString(): String {
+        var str = "fun appStylesheet() = object : StyleSheet() {\n" + "init {\n"
         val aCSS = CSSReader.readFromString(element.data(), StandardCharsets.UTF_8, ECSSVersion.CSS30);
 
-        str += parseStyleRules(aCSS?.allStyleRules)
+        aCSS?.allStyleRules?.let {
+            str += parseStyleRules(it)
+        }
 
-        aCSS?.allMediaRules?.forEach {
-            val media = it.allMediaQueries.first?.asCSSString
-            str += "media(\"$media\") {\n" + parseStyleRules(it?.allStyleRules) + "}\n"
+        aCSS?.allMediaRules?.forEach { mediaRule ->
+            val media = mediaRule.allMediaQueries.joinToString { it.asCSSString }
+            mediaRule?.allStyleRules?.let {
+                str += "media(\"$media\") {\n" + parseStyleRules(it) + "}\n"
+            }
         }
         str += "}}\n"
         return str
