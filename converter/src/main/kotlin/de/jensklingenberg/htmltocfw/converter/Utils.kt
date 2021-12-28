@@ -34,4 +34,11 @@ val unitsMap = mapOf(
 )
 
 
+val String.isNumber: Boolean
+    get() {
+        return this.toIntOrNull() != null
+    }
 
+fun formatStringValue(text: String): String {
+    return "\"${text}\""
+}

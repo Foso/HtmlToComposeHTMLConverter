@@ -1,22 +1,28 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
-import org.jsoup.nodes.Element
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import org.jsoup.nodes.Attributes
 
-class InputNode(private val element: Element) : MyNode {
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.Input]
+ */
+class InputNode(private val htmlAttributes: Attributes) : MyNode {
+    val ATTR_TYPE = "type"
+    val TAG = "Input"
 
-    override fun print(): String {
-        var str = "Input ("
-        val hasType = element.attributes().get("type")
-        element.attributes().remove("type")
-        val attrText = getAttributesText(element.attributes().asList())
+    override fun toString(): String {
+        var str = "$TAG ("
+        val typeValue = htmlAttributes.get(ATTR_TYPE)
+        htmlAttributes.remove(ATTR_TYPE)
+        val attrText = parseAttributes(htmlAttributes.asList())
         str += attrText
 
-        if (hasType.isNotBlank()) {
+        if (typeValue.isNotBlank()) {
             if (attrText.isNotBlank()) {
                 str += (", ")
             }
-            val type = hasType.capitalize()
+            val type = typeValue.capitalize()
             str += ("type = InputType.${type}")
         }
 

@@ -5,10 +5,7 @@ import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
 import org.jsoup.nodes.TextNode
 
-interface MyNode {
-    fun print(): String
-}
-
+interface MyNode
 
 fun getMyNode(node: Node): MyNode {
     return when (node) {
@@ -21,44 +18,53 @@ fun getMyNode(node: Node): MyNode {
         is Element -> {
             when (node.tagName()) {
                 "a" -> {
-                    ANode(node)
+                    ANode(node.attributes(), node.childNodes())
                 }
                 "form" -> {
-                    FormNode(node)
+                    FormNode(node.attributes(), node.childNodes())
                 }
                 "img" -> {
-                    ImgNode(node)
+                    ImgNode(node.attributes())
                 }
                 "input" -> {
-                    InputNode(node)
+                    InputNode(node.attributes())
                 }
                 "label" -> {
-                    LabelNode(node)
+                    LabelNode(node.attributes(), node.childNodes())
+                }
+                "meta" -> {
+                    EmptyNode()
                 }
                 "option" -> {
-                    OptionNode(node)
+                    OptionNode(node.attributes(), node.childNodes())
                 }
                 "optgroup" -> {
-                    OptGroupNode(node)
+                    OptGroupNode(node.attributes(), node.childNodes())
                 }
                 "path" -> {
-                    PathNode(node)
+                    PathNode(node.attributes())
                 }
                 "textarea" -> {
-                    TextAreaNode(node)
+                    TextAreaNode(node.attributes(), node.childNodes())
                 }
                 "script" -> {
-                    return UnsupportedNode()
+                    EmptyNode()
+                }
+                "title" -> {
+                    TitleNode(node.text())
+                }
+                "style" -> {
+                    StyleNode(node)
                 }
 
                 else -> {
-                    GenericNode(node)
+                    GenericNode(node.tagName(), node.childNodes(), node.attributes())
                 }
             }
         }
         else -> {
             println("Not found: ${node.nodeName()}")
-            return UnsupportedNode()
+            return EmptyNode()
         }
 
     }

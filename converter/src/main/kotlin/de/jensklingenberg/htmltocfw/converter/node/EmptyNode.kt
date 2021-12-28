@@ -1,8 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-class UnsupportedNode : MyNode {
-    override fun print(): String {
+class EmptyNode : MyNode {
+    override fun toString(): String {
         return ""
     }
-
 }

@@ -1,19 +1,24 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
-import org.jsoup.nodes.Attribute
-import org.jsoup.nodes.Element
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import org.jsoup.nodes.Attributes
+import org.jsoup.nodes.Node
 
-class LabelNode(private val element: Element) : MyNode {
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.Label]
+ */
 
-    override fun print(): String {
-        var str = "Label ("
-        val forValue = element.attributes().get("for")
-        element.attributes().remove("for")
+class LabelNode(private val htmlAttributes: Attributes, private val childNodes: List<Node>) : MyNode {
+    private val ATTR_FOR = "for"
+    private val TAG = "Label"
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
+    override fun toString(): String {
+        var str = "$TAG ("
+        val forValue = htmlAttributes.get(ATTR_FOR)
+        htmlAttributes.remove(ATTR_FOR)
 
-        val attrText = getAttributesText(attributesList)
+        val attrText = parseAttributes(htmlAttributes.asList())
         str += attrText
 
         if (forValue.isNotBlank()) {
@@ -21,22 +26,18 @@ class LabelNode(private val element: Element) : MyNode {
                 str += (", ")
             }
         }
-        str += ("forId = \"${forValue}\"")
-        str += (")")
+        str += ("forId = \"${forValue}\"") + ")"
 
-        val childNodesText = element.childNodes().joinToString(separator = "") {
-            getMyNode(it).print()
+        val childNodesText = childNodes.joinToString("") {
+            getMyNode(it).toString()
         }
 
         str += "{"
         if (childNodesText.isNotBlank()) {
-            str += "\n"
+            str += "\n" + childNodesText
         }
-        str += childNodesText
-        if (childNodesText.isNotBlank()) {
-            str += "\n"
-        }
-        str += ("}\n")
+
+        str += "}\n"
         return str
     }
 

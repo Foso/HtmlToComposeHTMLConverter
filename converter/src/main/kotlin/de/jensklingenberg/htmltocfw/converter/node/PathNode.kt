@@ -1,16 +1,18 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
-import org.jsoup.nodes.Element
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import org.jsoup.nodes.Attributes
 
-class PathNode(private val element: Element) : MyNode {
+class PathNode(private val htmlAttributes: Attributes) : MyNode {
+    private val ATTR_D = "d"
+    private val TAG = "Path"
 
-    override fun print(): String {
-        var str = "Path ("
-        val dValue = element.attributes().get("d")
-        element.attributes().remove("d")
+    override fun toString(): String {
+        var str = "$TAG ("
+        val dValue = htmlAttributes.get(ATTR_D)
+        htmlAttributes.remove(ATTR_D)
 
-        str += (getAttributesText(element.attributes().asList()))
+        str += parseAttributes(htmlAttributes.asList())
 
         if (dValue.isNotBlank()) {
             val type = dValue.capitalize()

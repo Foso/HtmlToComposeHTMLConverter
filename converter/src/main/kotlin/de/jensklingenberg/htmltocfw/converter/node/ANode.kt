@@ -1,20 +1,24 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
-import org.jsoup.nodes.Attribute
-import org.jsoup.nodes.Element
+import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import org.jsoup.nodes.Attributes
+import org.jsoup.nodes.Node
 
-class ANode(private val element: Element) : MyNode {
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.A]
+ */
+class ANode(private val htmlAttributes: Attributes, val childNodes: List<Node>) : MyNode {
+    private val TAG = "A"
+    private val ATTR_HREF = "href"
 
-    override fun print(): String {
+    override fun toString(): String {
 
-        var str = "A ("
-        val hrefValue = element.attributes().get("href")
-        element.attributes().remove("href")
+        var str = "$TAG ("
+        val hrefValue = htmlAttributes.get(ATTR_HREF)
+        htmlAttributes.remove(ATTR_HREF)
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
-
-        val attrText = getAttributesText(attributesList)
+        val attrText = parseAttributes(htmlAttributes.asList())
         str += attrText
 
         if (hrefValue.isNotBlank()) {
@@ -22,21 +26,18 @@ class ANode(private val element: Element) : MyNode {
                 str += (", ")
             }
         }
-        str += ("href = \"${hrefValue}\"")
-        str += (")")
+        str += ("href = \"${hrefValue}\"") + ")"
 
-        val childNodesText = element.childNodes().joinToString(separator = "") {
-            getMyNode(it).print()
+        val childNodesText = childNodes.joinToString(separator = "") {
+            getMyNode(it).toString()
         }
 
         str += "{"
+
         if (childNodesText.isNotBlank()) {
-            str += "\n"
+            str += "\n" + childNodesText + "\n"
         }
-        str += childNodesText
-        if (childNodesText.isNotBlank()) {
-            str += "\n"
-        }
+
         str += ("}\n")
         return str
     }

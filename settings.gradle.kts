@@ -3,7 +3,6 @@ rootProject.name = "HtmlToComposeWebConverter"
 
 include(
     ":converter",
-
     ":ideaplugin"
 
 )

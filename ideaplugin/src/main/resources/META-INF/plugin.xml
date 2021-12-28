@@ -4,7 +4,7 @@
     <vendor email="mail@jensklingenberg.de" url="http://www.jensklingenberg.de">Jens Klingenberg</vendor>
 
     <description><![CDATA[
-    <h3>Intellij Idea Plugin that can convert HTML to Compose for Web code.</h3>
+    <h3>IntelliJ-based Plugin that can convert HTML to Compose for Web code.</h3>
 
    Turn this:
 <p align="center">
@@ -16,8 +16,8 @@ Into this:
   <img src ="https://raw.githubusercontent.com/Foso/HtmlToComposeWebConverter/master/docs/composebutton.png" height=500 />
 </p>
 
-## Introduction / HOW TO USE
-
+## Introduction
+How to use:
 1) Put your cursor to the place where you want to insert the Compose code.
 2) Open the Plugin under Tools> HTML to Compose Web
  <p align="center">
@@ -37,7 +37,6 @@ Source code is available at https://github.com/Foso/HtmlToComposeWebConverter
          on how to target different products -->
      <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
-
     <extensions defaultExtensionNs="com.intellij">
     </extensions>
 

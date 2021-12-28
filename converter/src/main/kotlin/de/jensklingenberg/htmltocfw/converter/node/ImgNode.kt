@@ -1,29 +1,30 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.getAttributesText
-import org.jsoup.nodes.Attribute
-import org.jsoup.nodes.Element
+import org.jsoup.nodes.Attributes
 
-class ImgNode(val element: Element) : MyNode {
+/**
+ * This class generates the code for
+ * [org.jetbrains.compose.web.dom.Img]
+ * @param htmlAttributes A list of HTML Attributes for < img>
+ */
+class ImgNode(private val htmlAttributes: Attributes) : MyNode {
+    val ATTR_ALT = "alt"
+    val ATTR_SRC = "src"
+    val TAG = "Img"
 
-    override fun print(): String {
+    override fun toString(): String {
 
-        var str = "Img ("
-        val altValue = element.attributes().get("alt")
-        element.attributes().remove("alt")
-        val srcValue = element.attributes().get("src")
-        element.attributes().remove("src")
+        var str = "$TAG ("
+        val altValue = htmlAttributes.get(ATTR_ALT)
+        htmlAttributes.remove(ATTR_ALT)
+        val srcValue = htmlAttributes.get(ATTR_SRC)
+        htmlAttributes.remove(ATTR_SRC)
 
-        val attributesList: MutableList<Attribute> = element.attributes().asList()
-
-        val attrText = getAttributesText(attributesList)
-        str += (attrText)
-        if (attrText.isNotBlank()) {
-            str += (", ")
-        }
-        str += ("src = \"${srcValue}\"")
-        str += (", alt = \"${altValue}\"")
-        str += (")\n")
+        str += listOf(
+            "src = \"${srcValue}\"",
+            "alt = \"${altValue}\""
+        ).joinToString(", ") { it }
+        str += ")\n"
 
         return str
     }
