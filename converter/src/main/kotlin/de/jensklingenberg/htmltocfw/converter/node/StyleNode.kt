@@ -36,8 +36,8 @@ fun read(text: String): CascadingStyleSheet? {
      * otherwise there is always a NoClassDefFoundException
      */
     val aClass = StyleNode::class.java.classLoader.loadClass("com.helger.css.ECSSVersion")
-    val ter: ECSSVersion = aClass.enumConstants[2] as ECSSVersion
-    return CSSReader.readFromString(text, StandardCharsets.UTF_8, ter);
+    val ecssVersion: ECSSVersion = aClass.enumConstants[2] as ECSSVersion
+    return CSSReader.readFromString(text, StandardCharsets.UTF_8, ecssVersion);
 }
 
 /**
