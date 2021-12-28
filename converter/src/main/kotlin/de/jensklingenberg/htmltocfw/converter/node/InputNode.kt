@@ -13,16 +13,16 @@ class InputNode(private val htmlAttributes: Attributes) : MyNode {
 
     override fun toString(): String {
         var str = "$TAG ("
-        val hasType = htmlAttributes.get(ATTR_TYPE)
+        val typeValue = htmlAttributes.get(ATTR_TYPE)
         htmlAttributes.remove(ATTR_TYPE)
         val attrText = parseAttributes(htmlAttributes.asList())
         str += attrText
 
-        if (hasType.isNotBlank()) {
+        if (typeValue.isNotBlank()) {
             if (attrText.isNotBlank()) {
                 str += (", ")
             }
-            val type = hasType.capitalize()
+            val type = typeValue.capitalize()
             str += ("type = InputType.${type}")
         }
 

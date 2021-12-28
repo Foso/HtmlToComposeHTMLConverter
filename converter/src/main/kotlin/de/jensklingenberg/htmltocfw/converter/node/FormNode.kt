@@ -8,9 +8,9 @@ import org.jsoup.nodes.Node
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.Form]
  */
-class FormNode(private val htmlAttributes: Attributes, val childNodes: List<Node>) : MyNode {
-    val TAG = "Form"
-    val ATTR_ACTION = "action"
+class FormNode(private val htmlAttributes: Attributes, private val childNodes: List<Node>) : MyNode {
+    private val TAG = "Form"
+    private val ATTR_ACTION = "action"
 
     override fun toString(): String {
         var str = "$TAG ("
@@ -25,18 +25,16 @@ class FormNode(private val htmlAttributes: Attributes, val childNodes: List<Node
         }
         str += "action = \"${actionValue}\"" + ")"
 
-        val childNodesText = childNodes.joinToString(separator = "") {
-            getMyNode(it).toString()
+        val childNodesText = childNodes.joinToString("") { node ->
+            getMyNode(node).toString()
         }
 
         str += "{"
+
         if (childNodesText.isNotBlank()) {
-            str += "\n"
+            str += "\n" + childNodesText + "\n"
         }
-        str += childNodesText
-        if (childNodesText.isNotBlank()) {
-            str += "\n"
-        }
+
         str += ("}\n")
         return str
     }

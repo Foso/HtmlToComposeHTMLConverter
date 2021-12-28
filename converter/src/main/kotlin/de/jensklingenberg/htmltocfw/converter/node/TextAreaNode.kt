@@ -9,8 +9,8 @@ import org.jsoup.nodes.TextNode
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.TextArea]
  */
-class TextAreaNode(private val htmlAttributes: Attributes, val childNodes: List<Node>) : MyNode {
-    val TAG = "TextArea"
+class TextAreaNode(private val htmlAttributes: Attributes, private val childNodes: List<Node>) : MyNode {
+    private val TAG = "TextArea"
 
     override fun toString(): String {
         var str = "$TAG ("

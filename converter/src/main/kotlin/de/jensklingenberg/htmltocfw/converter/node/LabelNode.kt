@@ -8,7 +8,8 @@ import org.jsoup.nodes.Node
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.Label]
  */
-class LabelNode(private val htmlAttributes: Attributes, val childNodes: List<Node>) : MyNode {
+
+class LabelNode(private val htmlAttributes: Attributes, private val childNodes: List<Node>) : MyNode {
     private val ATTR_FOR = "for"
     private val TAG = "Label"
 
@@ -27,19 +28,16 @@ class LabelNode(private val htmlAttributes: Attributes, val childNodes: List<Nod
         }
         str += ("forId = \"${forValue}\"") + ")"
 
-        val childNodesText = childNodes.joinToString(separator = "") {
+        val childNodesText = childNodes.joinToString("") {
             getMyNode(it).toString()
         }
 
         str += "{"
         if (childNodesText.isNotBlank()) {
-            str += "\n"
+            str += "\n" + childNodesText
         }
-        str += childNodesText
-        if (childNodesText.isNotBlank()) {
-            str += "\n"
-        }
-        str += ("}\n")
+
+        str += "}\n"
         return str
     }
 

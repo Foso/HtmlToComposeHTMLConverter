@@ -23,15 +23,14 @@ fun htmlToCompose(html: String): String {
     parser.settings(ParseSettings(true, true))
     val doc = parser.parseInput(html, "")
 
-    val head = doc.head().childNodes().joinToString(separator = "") {
-        getMyNode(it).toString()
+    val head = doc.head().childNodes().joinToString("") { node ->
+        getMyNode(node).toString()
     }
 
     val hasStyle = doc.head().allElements.any { it.tag().toString() == "style" }
 
-
-    val body = doc.body().childNodes().joinToString(separator = "") {
-        getMyNode(it).toString()
+    val body = doc.body().childNodes().joinToString("") { node ->
+        getMyNode(node).toString()
     }
 
     val wrappedBody = if (hasStyle) {

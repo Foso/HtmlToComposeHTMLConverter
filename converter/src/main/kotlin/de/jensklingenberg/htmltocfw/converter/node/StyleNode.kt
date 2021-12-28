@@ -5,7 +5,6 @@ import com.helger.css.ECSSVersion
 import com.helger.css.decl.CSSStyleRule
 import com.helger.css.reader.CSSReader
 import de.jensklingenberg.htmltocfw.converter.getStyleProperties
-import org.jsoup.nodes.Element
 import java.nio.charset.StandardCharsets
 
 /**
@@ -31,11 +30,11 @@ fun parseStyleRules(allStyleRules: ICommonsList<CSSStyleRule>): String {
 /**
  * This will transform the style tag to a StyleSheet
  */
-class StyleNode(private val element: Element) : MyNode {
+class StyleNode(private val styleTagText: String) : MyNode {
 
     override fun toString(): String {
         var str = "fun appStylesheet() = object : StyleSheet() {\n" + "init {\n"
-        val aCSS = CSSReader.readFromString(element.data(), StandardCharsets.UTF_8, ECSSVersion.CSS30);
+        val aCSS = CSSReader.readFromString(styleTagText, StandardCharsets.UTF_8, ECSSVersion.CSS30);
 
         aCSS?.allStyleRules?.let {
             str += parseStyleRules(it)

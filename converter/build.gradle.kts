@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
     implementation("org.jsoup:jsoup:1.14.3")
     implementation("com.helger:ph-css:6.4.0")
 }

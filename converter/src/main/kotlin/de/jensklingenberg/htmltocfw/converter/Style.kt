@@ -75,7 +75,6 @@ fun getStyleProperties(propName: String, propValue: String): String {
 }
 
 
-
 fun parseStyleText(attribute: Attribute): String {
     var str = "style {\n"
 

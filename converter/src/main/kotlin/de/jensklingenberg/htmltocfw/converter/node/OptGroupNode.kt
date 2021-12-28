@@ -19,24 +19,20 @@ class OptGroupNode(private val htmlAttributes: Attributes, val childNodes: List<
         htmlAttributes.remove(ATTR_LABEL)
 
         val attrText = parseAttributes(htmlAttributes.asList())
-        str += (attrText)
+        str += attrText
 
         if (attrText.isNotBlank()) {
             str += (",")
         }
         str += "label = \"${hasSrc}\"" + ")"
 
-        val childNodesText = childNodes.joinToString(separator = "") {
+        val childNodesText = childNodes.joinToString("") {
             getMyNode(it).toString()
         }
 
         str += "{"
         if (childNodesText.isNotBlank()) {
-            str += "\n"
-        }
-        str += childNodesText
-        if (childNodesText.isNotBlank()) {
-            str += "\n"
+            str += "\n" + childNodesText + "\n"
         }
         str += "}\n"
         return str

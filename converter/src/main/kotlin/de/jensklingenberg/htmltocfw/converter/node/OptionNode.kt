@@ -26,17 +26,13 @@ class OptionNode(private val attributes: Attributes, val childNodes: List<Node>)
         }
         str += ("value = \"${valueValue}\"") + ")"
 
-        val childNodesText = childNodes.joinToString(separator = "") {
+        val childNodesText = childNodes.joinToString("") {
             getMyNode(it).toString()
         }
 
         str += "{"
         if (childNodesText.isNotBlank()) {
-            str += "\n"
-        }
-        str += childNodesText
-        if (childNodesText.isNotBlank()) {
-            str += "\n"
+            str += "\n" + childNodesText + "\n"
         }
         str += ("}\n")
         return str

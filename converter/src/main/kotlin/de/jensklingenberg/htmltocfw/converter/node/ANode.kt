@@ -33,13 +33,11 @@ class ANode(private val htmlAttributes: Attributes, val childNodes: List<Node>) 
         }
 
         str += "{"
+
         if (childNodesText.isNotBlank()) {
-            str += "\n"
+            str += "\n" + childNodesText + "\n"
         }
-        str += childNodesText
-        if (childNodesText.isNotBlank()) {
-            str += "\n"
-        }
+
         str += ("}\n")
         return str
     }

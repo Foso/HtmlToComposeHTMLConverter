@@ -1,6 +1,5 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Attributes
 
 /**
@@ -21,14 +20,11 @@ class ImgNode(private val htmlAttributes: Attributes) : MyNode {
         val srcValue = htmlAttributes.get(ATTR_SRC)
         htmlAttributes.remove(ATTR_SRC)
 
-        val attrText = parseAttributes(htmlAttributes.asList())
-        str += attrText
-        if (attrText.isNotBlank()) {
-            str += (", ")
-        }
-        str += ("src = \"${srcValue}\"")
-        str += (", alt = \"${altValue}\"")
-        str += (")\n")
+        str += listOf(
+            "src = \"${srcValue}\"",
+            "alt = \"${altValue}\""
+        ).joinToString(", ") { it }
+        str += ")\n"
 
         return str
     }

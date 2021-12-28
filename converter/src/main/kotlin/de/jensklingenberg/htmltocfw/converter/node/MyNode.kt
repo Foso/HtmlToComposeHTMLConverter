@@ -5,10 +5,7 @@ import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
 import org.jsoup.nodes.TextNode
 
-interface MyNode {
-
-}
-
+interface MyNode
 
 fun getMyNode(node: Node): MyNode {
     return when (node) {
@@ -35,7 +32,7 @@ fun getMyNode(node: Node): MyNode {
                 "label" -> {
                     LabelNode(node.attributes(), node.childNodes())
                 }
-                "meta" ->{
+                "meta" -> {
                     EmptyNode()
                 }
                 "option" -> {
@@ -57,11 +54,11 @@ fun getMyNode(node: Node): MyNode {
                     TitleNode(node.text())
                 }
                 "style" -> {
-                    StyleNode(node)
+                    StyleNode(node.data())
                 }
 
                 else -> {
-                    GenericNode(node)
+                    GenericNode(node.tagName(), node.childNodes(), node.attributes())
                 }
             }
         }

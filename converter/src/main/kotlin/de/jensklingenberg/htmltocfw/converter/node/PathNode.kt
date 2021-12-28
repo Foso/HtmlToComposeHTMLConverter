@@ -4,8 +4,8 @@ import de.jensklingenberg.htmltocfw.converter.parseAttributes
 import org.jsoup.nodes.Attributes
 
 class PathNode(private val htmlAttributes: Attributes) : MyNode {
-    val ATTR_D = "d"
-    val TAG = "Path"
+    private val ATTR_D = "d"
+    private val TAG = "Path"
 
     override fun toString(): String {
         var str = "$TAG ("
