@@ -17,8 +17,8 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.DialogWrapper
-import de.jensklingenberg.htmltocfw.ideaplugin.theme.WidgetTheme
 import de.jensklingenberg.htmltocfw.converter.htmlToCompose
+import de.jensklingenberg.htmltocfw.ideaplugin.theme.WidgetTheme
 import javax.swing.JComponent
 
 
@@ -36,6 +36,7 @@ class ConvertHtmlAction : DumbAwareAction() {
 
         DemoDialog(project = e.project, onGenerate = {
             val compo = htmlToCompose(it)
+
             WriteCommandAction.runWriteCommandAction(project) {
                 editor.document.replaceString(start, end, compo)
             }
@@ -59,14 +60,16 @@ class ConvertHtmlAction : DumbAwareAction() {
                         Surface(modifier = Modifier.fillMaxSize()) {
                             Column {
                                 val textState = remember { mutableStateOf(TextFieldValue()) }
+
+                                Button(onClick = { onGenerate(textState.value.text) }) {
+                                    Text("Generate")
+                                }
                                 Text("Paste your HTML into the textfield and press generate")
                                 TextField(
                                     value = textState.value,
                                     onValueChange = { textState.value = it }
                                 )
-                                Button(onClick = { onGenerate(textState.value.text) }) {
-                                    Text("Generate")
-                                }
+
                             }
                         }
                     }

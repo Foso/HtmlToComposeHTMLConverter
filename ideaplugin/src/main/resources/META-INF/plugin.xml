@@ -37,7 +37,6 @@ Source code is available at https://github.com/Foso/HtmlToComposeWebConverter
          on how to target different products -->
      <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
-
     <extensions defaultExtensionNs="com.intellij">
     </extensions>
 

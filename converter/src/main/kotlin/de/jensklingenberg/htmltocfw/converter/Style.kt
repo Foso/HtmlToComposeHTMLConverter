@@ -5,10 +5,9 @@ import org.jsoup.nodes.Attribute
 /**
  *
  */
-fun getStyleProperties(propName: String, propValue: String): String {
+fun parseStyleProperties(propName: String, propValue: String): String {
 
     return when (propName) {
-
         "background-image" -> {
             "backgroundImage(${propValue})"
         }
@@ -18,13 +17,15 @@ fun getStyleProperties(propName: String, propValue: String): String {
             if (unitType == null) {
                 "property(\"$propName\",\"${propValue}\")"
             } else {
-
                 val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
                 "borderRadius(${newValue})"
             }
         }
         "box-sizing" -> {
             "boxSizing(\"${propValue}\")"
+        }
+        "cursor" -> {
+            "cursor(\"${propValue}\")"
         }
         "display" -> {
             "display(DisplayStyle.${propValue.capitalize()})"
@@ -85,7 +86,7 @@ fun parseStyleText(attribute: Attribute): String {
         val propName = it.substringBefore(":").trimStart()
         val propValue = it.substringAfter(":").trimStart().replace("\"", "\\\"")
 
-        str += getStyleProperties(propName, propValue)
+        str += parseStyleProperties(propName, propValue)
 
         str += "\n"
     }

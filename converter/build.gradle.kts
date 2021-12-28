@@ -16,9 +16,12 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
     implementation("org.jsoup:jsoup:1.14.3")
+    implementation("org.slf4j:slf4j-api:2.0.0-alpha5") {
+        because("ph-css")
+    }
     implementation("com.helger:ph-css:6.4.0")
+
 }
 
 tasks.test {
@@ -27,6 +30,26 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+val mainClass = "de.jensklingenberg.htmltocfw.converter.MainKt"
+tasks {
+    register("fatJar", Jar::class.java) {
+        archiveClassifier.set("all")
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        manifest {
+            attributes("Main-Class" to mainClass)
+        }
+
+        from(configurations.compileClasspath.get()
+            .onEach { println("add from dependencies: ${it.name}") }
+            .map { if (it.isDirectory) it else zipTree(it) })
+        from(configurations.runtimeClasspath.get()
+            .onEach { println("add from dependencies: ${it.name}") }
+            .map { if (it.isDirectory) it else zipTree(it) })
+        val sourcesMain = sourceSets.main.get()
+        sourcesMain.allSource.forEach { println("add from sources: ${it.name}") }
+        from(sourcesMain.output)
+    }
 }
 
 application {

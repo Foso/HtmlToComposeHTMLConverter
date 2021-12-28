@@ -1,0 +1,45 @@
+@Composable
+fun GeneratedComposable(){
+ fun appStylesheet() = object : StyleSheet() {
+init {
+".button" style { 
+property("border","none")
+property("color","white")
+padding(15.px, 32.px)
+textAlign("center")
+textDecoration("none")
+display(DisplayStyle.Inline-block)
+fontSize(16.px)
+margin(4.px, 2.px)
+cursor("pointer")
+}
+".button1" style { 
+property("background-color","#4CAF50")
+}
+".button2" style { 
+property("background-color","#008CBA")
+}
+}}
+ 
+Style(appStylesheet())
+H1 {
+Text("The button element - Styled with CSS")
+
+}
+P {
+Text("Change the background color of a button with the background-color property:")
+
+}
+Button (attrs = {
+classes("button", "button1")
+}){
+Text("Green")
+
+}
+Button (attrs = {
+classes("button", "button2")
+}){
+Text("Blue")
+
+}
+}

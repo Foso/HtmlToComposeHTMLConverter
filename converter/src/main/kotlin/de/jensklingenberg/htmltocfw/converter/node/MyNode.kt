@@ -54,7 +54,7 @@ fun getMyNode(node: Node): MyNode {
                     TitleNode(node.text())
                 }
                 "style" -> {
-                    StyleNode(node.data())
+                    StyleNode(node)
                 }
 
                 else -> {
