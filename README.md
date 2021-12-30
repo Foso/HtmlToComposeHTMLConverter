@@ -58,25 +58,33 @@ Alternatively you can download the plugin from the release archive https://githu
 
 ## :card_file_box:&nbsp;How can I contribute to this plugin?
 
-* Create a [bug report](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=bug&template=i-encountered-a-bug-while-using-the-plugin.md&title=) when accounting a bug
-* Create a [feature request](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=enhancement&template=i-d-like-to-request-a-feature.md&title=)
+* Create
+  a [bug report](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=bug&template=i-encountered-a-bug-while-using-the-plugin.md&title=)
+  when accounting a bug
+* Create
+  a [feature request](https://github.com/Foso/HtmlToComposeWebConverter/issues/new?assignees=&labels=enhancement&template=i-d-like-to-request-a-feature.md&title=)
 * Open up a [pull request](https://github.com/Foso/HtmlToComposeWebConverter/pulls)
 
 ## :fire:&nbsp;What's new?
 
-### 1.0.3
+### 1.0.4
+
 <ul>
-    <li>initial release</li>
+    <li>CSS style rules and media rules in < style> tag will now be converted to 
+Compose for Web StyleSheets</li>
+<li>All generated Code will be wrapped inside a Composable called GeneratedComposable() </li>
+<li> < title> will be converted to KotlinJS document.title=XZY </li>
+
 </ul>
 
 # 🏠 Architecture
 
 ## 🛠️ Built With
+
 ### Kotlin
+
 [![jCenter](https://img.shields.io/badge/Kotlin-1.6.10-green.svg
 )]()
-
-
 
 ### Project Structure
 * <kbd>converter</kbd> - Module with the converter 
