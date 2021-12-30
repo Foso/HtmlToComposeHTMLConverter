@@ -23,10 +23,16 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**Software used**
+
+<!--Go to "Help > About" and paste the result down here-->
+
+```
+IntelliJ IDEA 2019.2 (Ultimate Edition)
+Build #IU-192.5728.98, built on July 23, 2019
+Runtime version: 11.0.3+12-b304.10 amd64
+Windows 10 10.0
+```
 
 
 **Additional context**
