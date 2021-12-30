@@ -33,7 +33,6 @@ val unitsMap = mapOf(
     "fr" to "fr",
 )
 
-
 val String.isNumber: Boolean
     get() {
         return this.toIntOrNull() != null

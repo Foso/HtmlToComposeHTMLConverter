@@ -30,7 +30,7 @@ fun parseStyleRules(styleRules: ICommonsList<CSSStyleRule>): String {
 }
 
 
-fun read(text: String): CascadingStyleSheet? {
+fun parseCascadingStyleSheet(text: String): CascadingStyleSheet? {
     /**
      * I don't understand this issue, ECSSVersion.CSS30 can only be found by reflection
      * otherwise there is always a NoClassDefFoundException
@@ -46,16 +46,16 @@ fun read(text: String): CascadingStyleSheet? {
 class StyleNode(private val htmlStyleNode: Element) : MyNode {
 
     override fun toString(): String {
-        val hasMediaAttribute = htmlStyleNode.attributes().get("media")
+        val mediaAttribute = htmlStyleNode.attributes().get("media")
 
         var str = "fun appStylesheet() = object : StyleSheet() {\n" + "init {\n"
 
         val aCSS =
-            read(htmlStyleNode.data())
+            parseCascadingStyleSheet(htmlStyleNode.data())
 
         aCSS?.allStyleRules?.let {
-            str += if (hasMediaAttribute.isNotBlank()) {
-                parseMediaQuery(hasMediaAttribute, it)
+            str += if (mediaAttribute.isNotBlank()) {
+                parseMediaQuery(mediaAttribute, it)
             } else {
                 parseStyleRules(it)
             }
