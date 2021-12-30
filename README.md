@@ -1,5 +1,5 @@
 <h1 align="center">HtmlToComposeForWebConverter</h1>
-Intellij Idea Plugin that can convert HTML to Compose for Web code.
+IntelliJ-based plugin that can convert HTML to Compose for Web code.
 
 Turn this:
 <p align="center">
