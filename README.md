@@ -43,6 +43,8 @@ Into this:
 
   
 ## :arrow_down:&nbsp;How to install?
+
+[JetBrains Marketplace](https://plugins.jetbrains.com/plugin/18261-html-to-compose-web-converter)
   
 You can install plugin directly from IntelliJ IDEA or Android Studio:
 1. Open _Preferences_
