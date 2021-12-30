@@ -1,4 +1,4 @@
-<h1 align="center">HtmlToComposeWebConverter</h1>
+<h1 align="center">HtmlToComposeForWebConverter</h1>
 Intellij Idea Plugin that can convert HTML to Compose for Web code.
 
 Turn this:
@@ -35,22 +35,14 @@ Into this:
 4) Your code is now inserted at your cursor.
 
 
-## What this plugin can't do (yet):
+## What this plugin can't do:
 * Convert JavaScript: 
 
  The <script> tag will be ignored, but inlined Javascript will be set without changes to the corresponding property. See the "button" code example above.
   
-* Convert style sheets: 
- 
- The <style> tag will be ignored, but inlined styles will be set to the corresponding style{} property. See the "button" code example above.
 
-* Convert < head>
-  
-  For now only the **< body>** will be parsed 
   
 ## :arrow_down:&nbsp;How to install?
-
-(It's in Review in the Marketplace right now, so you won't find it, install it manually)
   
 You can install plugin directly from IntelliJ IDEA or Android Studio:
 1. Open _Preferences_
