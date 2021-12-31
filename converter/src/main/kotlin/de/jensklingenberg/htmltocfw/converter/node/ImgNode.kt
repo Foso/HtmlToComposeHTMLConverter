@@ -8,9 +8,9 @@ import org.jsoup.nodes.Attributes
  * @param htmlAttributes A list of HTML Attributes for < img>
  */
 class ImgNode(private val htmlAttributes: Attributes) : MyNode {
-    val ATTR_ALT = "alt"
-    val ATTR_SRC = "src"
-    val TAG = "Img"
+    private val ATTR_ALT = "alt"
+    private val ATTR_SRC = "src"
+    private val TAG = "Img"
 
     override fun toString(): String {
 

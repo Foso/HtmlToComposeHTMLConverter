@@ -8,10 +8,10 @@ import org.jsoup.nodes.Node
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.OptGroup]
  */
-class OptGroupNode(private val htmlAttributes: Attributes, val childNodes: List<Node>) : MyNode {
+class OptGroupNode(private val htmlAttributes: Attributes, private val childNodes: List<Node>) : MyNode {
 
-    val ATTR_LABEL = "label"
-    val TAG = "OptGroup"
+    private val ATTR_LABEL = "label"
+    private val TAG = "OptGroup"
     override fun toString(): String {
 
         var str = "$TAG ("

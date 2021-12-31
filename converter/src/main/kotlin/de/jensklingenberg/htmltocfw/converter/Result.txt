@@ -1,258 +1,35 @@
 @Composable
 fun GeneratedComposable(){
- document.title="Page Title"
-fun appStylesheet() = object : StyleSheet() {
+ fun appStylesheet() = object : StyleSheet() {
+val mymove by keyframes {
+from {
+left(0.px)
+}
+to {
+left(200.px)
+}
+}
 init {
-"*" style { 
-boxSizing("border-box")
+"div" style { 
+width(100.px)
+height(100.px)
+property("background","red")
+position(Position.Relative)
+animation(mymove){
+duration(5.s)
 }
-"body" style { 
-fontFamily("Arial")
-property("margin","0")
-}
-".header" style { 
-padding(60.px)
-textAlign("center")
-property("background","#1abc9c")
-property("color","white")
-}
-".navbar" style { 
-display(DisplayStyle.Flex)
-property("background-color","#333")
-}
-".navbar a" style { 
-property("color","white")
-padding(14.px, 20.px)
-textDecoration("none")
-textAlign("center")
-}
-".navbar a:hover" style { 
-property("background-color","#ddd")
-property("color","black")
-}
-".row" style { 
-display(DisplayStyle.Flex)
-flexWrap(FlexWrap.Wrap)
-}
-".side" style { 
-property("flex","30%")
-property("background-color","#f1f1f1")
-padding(20.px)
-}
-".main" style { 
-property("flex","70%")
-property("background-color","white")
-padding(20.px)
-}
-".fakeimg" style { 
-property("background-color","#aaa")
-width(100.percent)
-padding(20.px)
-}
-".footer" style { 
-padding(20.px)
-textAlign("center")
-property("background","#ddd")
-}
-media("(max-width:700px)") {
-".row, .navbar" style { 
-flexDirection(FlexDirection.Column)
-}
+property("animation-play-state","paused")
 }
 }}
  
 Style(appStylesheet())
-// Note 
-Div (attrs = {
-style {
-property("background","yellow")
-padding(5.px)
-}
-}){
-H4 (attrs = {
-style {
-textAlign("center")
-}
-}){
-Text("Resize the browser window to see the responsive effect.")
-
-}
-
-}
-// Header 
-Div (attrs = {
-classes("header")
-}){
 H1 {
-Text("My Website")
+Text("The animation-play-state Property")
 
 }
 P {
-Text("With a ")
-B {
-Text("flexible")
+Text("Pause an animation:")
 
 }
-Text(" layout.")
-
-}
-
-}
-// Navigation Bar 
-Div (attrs = {
-classes("navbar")
-}){
-A (href = "#"){
-Text("Link")
-
-}
-A (href = "#"){
-Text("Link")
-
-}
-A (href = "#"){
-Text("Link")
-
-}
-A (href = "#"){
-Text("Link")
-
-}
-
-}
-// The flexible grid (content) 
-Div (attrs = {
-classes("row")
-}){
-Div (attrs = {
-classes("side")
-}){
-H2 {
-Text("About Me")
-
-}
-H5 {
-Text("Photo of me:")
-
-}
-Div (attrs = {
-classes("fakeimg")
-style {
-height(200.px)
-}
-}){
-Text("Image")
-
-}
-P {
-Text("Some text about me in culpa qui officia deserunt mollit anim..")
-
-}
-H3 {
-Text("More Text")
-
-}
-P {
-Text("Lorem ipsum dolor sit ame.")
-
-}
-Div (attrs = {
-classes("fakeimg")
-style {
-height(60.px)
-}
-}){
-Text("Image")
-
-}
-Br {}
-Div (attrs = {
-classes("fakeimg")
-style {
-height(60.px)
-}
-}){
-Text("Image")
-
-}
-Br {}
-Div (attrs = {
-classes("fakeimg")
-style {
-height(60.px)
-}
-}){
-Text("Image")
-
-}
-
-}
-Div (attrs = {
-classes("main")
-}){
-H2 {
-Text("TITLE HEADING")
-
-}
-H5 {
-Text("Title description, Dec 7, 2017")
-
-}
-Div (attrs = {
-classes("fakeimg")
-style {
-height(200.px)
-}
-}){
-Text("Image")
-
-}
-P {
-Text("Some text..")
-
-}
-P {
-Text("Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.")
-
-}
-Br {}
-H2 {
-Text("TITLE HEADING")
-
-}
-H5 {
-Text("Title description, Sep 2, 2017")
-
-}
-Div (attrs = {
-classes("fakeimg")
-style {
-height(200.px)
-}
-}){
-Text("Image")
-
-}
-P {
-Text("Some text..")
-
-}
-P {
-Text("Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.")
-
-}
-
-}
-
-}
-// Footer 
-Div (attrs = {
-classes("footer")
-}){
-H2 {
-Text("Footer")
-
-}
-
-}
+Div {}
 }

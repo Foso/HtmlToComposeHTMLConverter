@@ -8,8 +8,8 @@ import org.jsoup.nodes.Attributes
  * [org.jetbrains.compose.web.dom.Input]
  */
 class InputNode(private val htmlAttributes: Attributes) : MyNode {
-    val ATTR_TYPE = "type"
-    val TAG = "Input"
+    private val ATTR_TYPE = "type"
+    private val TAG = "Input"
 
     override fun toString(): String {
         var str = "$TAG ("

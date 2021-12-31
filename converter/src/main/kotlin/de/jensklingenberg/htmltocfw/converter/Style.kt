@@ -2,31 +2,56 @@ package de.jensklingenberg.htmltocfw.converter
 
 import org.jsoup.nodes.Attribute
 
+
+fun parsePropertyValueWithCssUnit(propName: String, propValue: String, composePropName: String): String {
+    val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
+
+    return if (unitType == null) {
+        "property(\"$propName\",\"${propValue}\")"
+    } else {
+        val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, ".${unitType.key}") }
+        "$composePropName(${newValue})"
+    }
+
+}
+
 /**
  *
  */
 fun parseStyleProperties(propName: String, propValue: String): String {
 
     return when (propName) {
-        "background-image" -> {
-            "backgroundImage(${propValue})"
-        }
-        "border-radius" -> {
-            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
+        "animation" -> {
+            var str = ""
+            val animationPropertyList = propValue.split(" ")
+            val keyFrameName = animationPropertyList.getOrNull(0)
+            val duration = animationPropertyList.getOrNull(1)
+            val iterationCount = animationPropertyList.getOrNull(2)
 
-            if (unitType == null) {
-                "property(\"$propName\",\"${propValue}\")"
-            } else {
-                val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
-                "borderRadius(${newValue})"
+            keyFrameName?.let {
+                str += "animation(${keyFrameName}){\n"
             }
+            duration?.let {
+                str += parseStyleProperties("duration", duration) + "\n"
+            }
+
+            iterationCount?.let {
+                str += "iterationCount = listOf(" + if (iterationCount == "infinite") {
+                    "null)"
+                } else {
+                    "$it)"
+                }
+
+            }
+
+            str += "}"
+            str
         }
-        "box-sizing" -> {
-            "boxSizing(\"${propValue}\")"
+        "animation-duration", "animation-delay" -> {
+            //Ignore
+            ""
         }
-        "cursor" -> {
-            "cursor(\"${propValue}\")"
-        }
+
         "display" -> {
             "display(DisplayStyle.${propValue.capitalize()})"
         }
@@ -36,37 +61,19 @@ fun parseStyleProperties(propName: String, propValue: String): String {
         "flex-wrap" -> {
             "flexWrap(FlexWrap.${propValue.capitalize()})"
         }
-        "font-family" -> {
-            "fontFamily(\"${propValue}\")"
-        }
-        "font-size" -> {
-            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
-
-            if (unitType == null) {
-                "property(\"$propName\",\"${propValue}\")"
-            } else {
-                val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
-                "fontSize(${newValue})"
-            }
-        }
-        "text-align" -> {
-            "textAlign(\"${propValue}\")"
+        "position" -> {
+            "position(Position.${propValue.capitalize()})"
         }
 
-        "text-decoration" -> {
-            "textDecoration(\"${propValue}\")"
+        "background-image", "border-radius", "box-sizing", "font-family", "font-size", "letter-spacing", "text-align", "text-decoration" -> {
+            //font-size --> fontSize
+            val (first, second) = propName.split("-")
+            val composePropName = first + second.capitalize()
+            parsePropertyValueWithCssUnit(propName, propValue, composePropName)
         }
-        "height", "width", "font", "margin", "padding" -> {
-            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
 
-            if (unitType == null) {
-                "property(\"$propName\",\"${propValue}\")"
-            } else {
-
-                val newValue =
-                    propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
-                "$propName(${newValue})"
-            }
+        "cursor", "duration", "font", "height", "width", "margin", "padding", "left", "top", "bottom" -> {
+            parsePropertyValueWithCssUnit(propName, propValue, propName)
         }
         else -> {
             "property(\"$propName\",\"${propValue}\")"

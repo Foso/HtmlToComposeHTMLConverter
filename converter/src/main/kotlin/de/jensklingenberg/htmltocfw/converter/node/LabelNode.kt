@@ -21,12 +21,11 @@ class LabelNode(private val htmlAttributes: Attributes, private val childNodes: 
         val attrText = parseAttributes(htmlAttributes.asList())
         str += attrText
 
-        if (forValue.isNotBlank()) {
-            if (attrText.isNotBlank()) {
-                str += (", ")
-            }
+        if (forValue.isNotBlank() && attrText.isNotBlank()) {
+            str += ", "
         }
-        str += ("forId = \"${forValue}\"") + ")"
+
+        str += "forId = \"${forValue}\"" + ")"
 
         val childNodesText = childNodes.joinToString("") {
             getMyNode(it).toString()

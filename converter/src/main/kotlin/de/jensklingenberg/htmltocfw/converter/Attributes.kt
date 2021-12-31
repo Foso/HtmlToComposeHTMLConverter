@@ -45,6 +45,7 @@ fun parseAttributes(attributesList: List<Attribute>): String {
             }
         }
         str += "\n"
+
         if (index == attributesList.lastIndex) {
             str += "}"
         }

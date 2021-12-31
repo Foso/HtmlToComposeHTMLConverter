@@ -9,8 +9,8 @@ import org.jsoup.nodes.Node
  * [org.jetbrains.compose.web.dom.Option]
  */
 class OptionNode(private val attributes: Attributes, val childNodes: List<Node>) : MyNode {
-    val ATTR_VALUE = "value"
-    val TAG = "Option"
+    private val ATTR_VALUE = "value"
+    private val TAG = "Option"
 
     override fun toString(): String {
 
