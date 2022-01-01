@@ -51,6 +51,25 @@ fun parseStyleProperties(propName: String, propValue: String): String {
             //Ignore
             ""
         }
+        "border" -> {
+            val animationPropertyList = propValue.split(" ")
+            val widthValue = animationPropertyList.getOrNull(0)
+            val lineStyle = animationPropertyList.getOrNull(1)
+            val color = animationPropertyList.getOrNull(2)
+            var str = "border {\n"
+            widthValue?.let {
+                str += parseStyleProperties("width", widthValue) + "\n"
+            }
+            color?.let {
+                str += parseStyleProperties("color", it) + "\n"
+            }
+            lineStyle?.let {
+                str += "style(LineStyle.${it.capitalize()})" + "\n"
+            }
+
+            str += "\n}"
+            str
+        }
 
         "display" -> {
             "display(DisplayStyle.${propValue.capitalize()})"
@@ -76,7 +95,8 @@ fun parseStyleProperties(propName: String, propValue: String): String {
             parsePropertyValueWithCssUnit(propName, propValue, propName)
         }
         else -> {
-            "property(\"$propName\",\"${propValue}\")"
+            val fixValue = propValue.replace("\"", "\\\"")
+            "property(\"$propName\",\"${fixValue}\")"
         }
     }
 

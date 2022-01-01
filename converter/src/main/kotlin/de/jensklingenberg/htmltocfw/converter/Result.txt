@@ -1,35 +1,39 @@
 @Composable
 fun GeneratedComposable(){
  fun appStylesheet() = object : StyleSheet() {
-val mymove by keyframes {
-from {
-left(0.px)
-}
-to {
-left(200.px)
-}
-}
 init {
-"div" style { 
-width(100.px)
-height(100.px)
-property("background","red")
-position(Position.Relative)
-animation(mymove){
-duration(5.s)
+"body" style { 
+property("counter-reset","my-sec-counter")
 }
-property("animation-play-state","paused")
+"h2::before" style { 
+property("counter-increment","my-sec-counter")
+property("content","\"Section \" counter(my-sec-counter) \". \"")
 }
 }}
  
 Style(appStylesheet())
-H1 {
-Text("The animation-play-state Property")
+H2 {
+Text("HTML Tutorial")
 
 }
-P {
-Text("Pause an animation:")
+H2 {
+Text("CSS Tutorial")
 
 }
-Div {}
+H2 {
+Text("JavaScript Tutorial")
+
+}
+H2 {
+Text("Bootstrap Tutorial")
+
+}
+H2 {
+Text("SQL Tutorial")
+
+}
+H2 {
+Text("PHP Tutorial")
+
+}
 }

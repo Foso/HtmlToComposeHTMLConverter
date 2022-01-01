@@ -1,29 +1,54 @@
+
+
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
 <style>
-div {
-  width: 100px;
-  height: 100px;
-  background: red;
-  position: relative;
-  animation: mymove 5s;
-  animation-play-state: paused;
+
+body {
+
+  /* Set "my-sec-counter" to 0 */
+
+  counter-reset: my-sec-counter;
+
 }
 
-@keyframes mymove {
-  from {left: 0px;}
-  to {left: 200px;}
+
+h2::before {
+
+  /* Increment "my-sec-counter" by 1 */
+
+  counter-increment: my-sec-counter;
+
+  content: "Section " counter(my-sec-counter) ". ";
+
 }
+
 </style>
+
 </head>
+
 <body>
 
-<h1>The animation-play-state Property</h1>
 
-<p>Pause an animation:</p>
+<h2>HTML Tutorial</h2>
 
-<div></div>
+<h2>CSS Tutorial</h2>
+
+<h2>JavaScript Tutorial</h2>
+
+<h2>Bootstrap Tutorial</h2>
+
+<h2>SQL Tutorial</h2>
+
+<h2>PHP Tutorial</h2>
+
 
 </body>
+
 </html>
+
+
