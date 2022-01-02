@@ -16,6 +16,10 @@ import java.nio.charset.StandardCharsets
  */
 class StyleNode(private val htmlStyleNode: Element) : MyNode {
 
+    override fun accept(visitor: Visitor) {
+        visitor.visitStyle(this)
+    }
+
     override fun toString(): String {
         val mediaAttribute = htmlStyleNode.attributes().get("media")
         val aCSS =

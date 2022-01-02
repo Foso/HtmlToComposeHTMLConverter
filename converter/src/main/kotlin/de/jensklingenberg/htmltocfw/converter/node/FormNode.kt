@@ -1,29 +1,34 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
-import org.jsoup.nodes.Attributes
 import org.jsoup.nodes.Node
 
 /**
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.Form]
  */
-class FormNode(private val htmlAttributes: Attributes, private val childNodes: List<Node>) : MyNode {
+class FormNode(
+    private val attrs: List<ComposeAttribute>,
+    private val childNodes: List<Node>,
+    val actionValue: String = ""
+) :
+    MyNode {
     private val TAG = "Form"
-    private val ATTR_ACTION = "action"
+
+    override fun accept(visitor: Visitor) {
+        visitor.visitForm(this)
+    }
 
     override fun toString(): String {
         var str = "$TAG ("
-        val actionValue = htmlAttributes.get(ATTR_ACTION)
-        htmlAttributes.remove(ATTR_ACTION)
 
-        val attrText = parseAttributes(htmlAttributes.asList())
-        str += attrText
-
-        if (actionValue.isNotBlank() && attrText.isNotBlank()) {
-            str += (", ")
+        val arguments = mutableListOf<String>()
+        if(attrs.isNotEmpty()){
+            arguments.add(parseAttributes(attrs))
         }
-        str += "action = \"${actionValue}\"" + ")"
+        arguments.add("action = \"${actionValue}\"")
+
+        str += arguments.joinToString { it } + ")"
 
         val childNodesText = childNodes.joinToString("") { node ->
             getMyNode(node).toString()
@@ -37,6 +42,18 @@ class FormNode(private val htmlAttributes: Attributes, private val childNodes: L
 
         str += ("}\n")
         return str
+    }
+
+    companion object {
+        private val ATTR_ACTION = "action"
+
+        fun createForm(node: Node): FormNode {
+            val htmlAttributes = node.attributes()
+            val actionValue = htmlAttributes.get(ATTR_ACTION)
+            htmlAttributes.remove(ATTR_ACTION)
+            val attrs = htmlAttributes.map { ComposeAttribute(it.key, it.value) }
+            return FormNode(attrs, node.childNodes(), actionValue)
+        }
     }
 
 }

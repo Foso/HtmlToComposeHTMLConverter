@@ -26,4 +26,8 @@ class GenericNode(private val tag: String, val childNodes: List<Node>, val attri
         str += ("}\n")
         return str
     }
+
+    override fun accept(visitor: Visitor) {
+        visitor.visitGeneric(this)
+    }
 }

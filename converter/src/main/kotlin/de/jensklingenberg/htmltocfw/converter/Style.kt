@@ -1,5 +1,6 @@
 package de.jensklingenberg.htmltocfw.converter
 
+import de.jensklingenberg.htmltocfw.converter.node.ComposeAttribute
 import org.jsoup.nodes.Attribute
 
 
@@ -103,7 +104,7 @@ fun parseStyleProperties(propName: String, propValue: String): String {
 }
 
 
-fun parseStyleText(attribute: Attribute): String {
+fun parseStyleText(attribute: ComposeAttribute): String {
     var str = "style {\n"
 
     //Find better way to parse style

@@ -16,4 +16,8 @@ class CFWTextNode(private val textNode: TextNode) : MyNode {
         }
     }
 
+    override fun accept(visitor: Visitor) {
+        visitor.visitText(this)
+    }
+
 }

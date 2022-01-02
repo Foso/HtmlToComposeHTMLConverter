@@ -11,6 +11,9 @@ import org.jsoup.nodes.Node
 class OptionNode(private val attributes: Attributes, val childNodes: List<Node>) : MyNode {
     private val ATTR_VALUE = "value"
     private val TAG = "Option"
+    override fun accept(visitor: Visitor) {
+        visitor.visitOption(this)
+    }
 
     override fun toString(): String {
 

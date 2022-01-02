@@ -1,33 +1,44 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
-import org.jsoup.nodes.Attributes
+import org.jsoup.nodes.Element
 
 /**
  * This class generates the code for
  * [org.jetbrains.compose.web.dom.Input]
  */
-class InputNode(private val htmlAttributes: Attributes) : MyNode {
+class InputNode(private val attrs: List<ComposeAttribute>, val type: String) : MyNode {
     private val ATTR_TYPE = "type"
     private val TAG = "Input"
+    override fun accept(visitor: Visitor) {
+        visitor.visitInput(this)
+    }
 
     override fun toString(): String {
         var str = "$TAG ("
-        val typeValue = htmlAttributes.get(ATTR_TYPE)
-        htmlAttributes.remove(ATTR_TYPE)
-        val attrText = parseAttributes(htmlAttributes.asList())
-        str += attrText
 
-        if (typeValue.isNotBlank()) {
-            if (attrText.isNotBlank()) {
-                str += (", ")
-            }
-            val type = typeValue.capitalize()
-            str += ("type = InputType.${type}")
+        val arguments = mutableListOf<String>()
+
+        if(attrs.isNotEmpty()){
+           str += parseAttributes(attrs)
         }
 
+        if (type.isNotBlank()) {
+            arguments.add("type = InputType.${type}")
+        }
+        str += arguments.joinToString { it }
         str += ")\n"
         return (str)
+    }
+
+    companion object {
+        fun createInput(node: Element): InputNode {
+            val htmlAttributes = node.attributes()
+            val typeValue = htmlAttributes.get("type").capitalize()
+            htmlAttributes.remove("type")
+
+            return InputNode(node.attributes().toList().map { ComposeAttribute(it.key, it.value) }, typeValue)
+        }
     }
 
 }

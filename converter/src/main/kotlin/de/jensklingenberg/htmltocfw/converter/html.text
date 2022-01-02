@@ -1,54 +1,19 @@
-
-
 <!DOCTYPE html>
-
 <html>
-
-<head>
-
-<style>
-
-body {
-
-  /* Set "my-sec-counter" to 0 */
-
-  counter-reset: my-sec-counter;
-
-}
-
-
-h2::before {
-
-  /* Increment "my-sec-counter" by 1 */
-
-  counter-increment: my-sec-counter;
-
-  content: "Section " counter(my-sec-counter) ". ";
-
-}
-
-</style>
-
-</head>
-
 <body>
 
+<h1>The textarea element</h1>
 
-<h2>HTML Tutorial</h2>
+<form action="/action_page.php">
+<label for="w3review">Review of W3Schools:</label>
+<textarea id="w3review" name="w3review" rows="4" cols="50">
+  At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+  </textarea>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
 
-<h2>CSS Tutorial</h2>
-
-<h2>JavaScript Tutorial</h2>
-
-<h2>Bootstrap Tutorial</h2>
-
-<h2>SQL Tutorial</h2>
-
-<h2>PHP Tutorial</h2>
-
-
+<p>Click the "Submit" button and the form-data will be sent to a page on the
+server called "action_page.php".</p>
 </body>
-
 </html>
-
-

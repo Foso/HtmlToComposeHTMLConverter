@@ -1,39 +1,29 @@
 @Composable
 fun GeneratedComposable(){
- fun appStylesheet() = object : StyleSheet() {
-init {
-"body" style { 
-property("counter-reset","my-sec-counter")
-}
-"h2::before" style { 
-property("counter-increment","my-sec-counter")
-property("content","\"Section \" counter(my-sec-counter) \". \"")
-}
-}}
- 
-Style(appStylesheet())
-H2 {
-Text("HTML Tutorial")
+  
+H1 {
+Text("The textarea element")
 
 }
-H2 {
-Text("CSS Tutorial")
+Form (action = "/action_page.php"){
+Label (forId = "w3review"){
+Text("Review of W3Schools:")
+}
+TextArea (attrs = {
+id("w3review")
+name("w3review")
+attr("rows","4")
+attr("cols","50")
+}, value = " At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies. ")
+Br {}
+Br {}
+Input (attrs = {
+attr("value","Submit")
+}, type = InputType.Submit)
 
 }
-H2 {
-Text("JavaScript Tutorial")
-
-}
-H2 {
-Text("Bootstrap Tutorial")
-
-}
-H2 {
-Text("SQL Tutorial")
-
-}
-H2 {
-Text("PHP Tutorial")
+P {
+Text("Click the \"Submit\" button and the form-data will be sent to a page on the server called \"action_page.php\".")
 
 }
 }
