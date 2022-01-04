@@ -1,13 +1,16 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
-import de.jensklingenberg.htmltocfw.converter.node.ANode.Companion.createAnode
+import de.jensklingenberg.htmltocfw.converter.node.ANode.Companion.createANode
 import de.jensklingenberg.htmltocfw.converter.node.FormNode.Companion.createForm
+import de.jensklingenberg.htmltocfw.converter.node.GenericNode.Companion.createGenericNode
 import de.jensklingenberg.htmltocfw.converter.node.ImgNode.Companion.createImg
 import de.jensklingenberg.htmltocfw.converter.node.InputNode.Companion.createInput
 import de.jensklingenberg.htmltocfw.converter.node.LabelNode.Companion.createLabel
 import de.jensklingenberg.htmltocfw.converter.node.OptGroupNode.Companion.createOptGroupNode
+import de.jensklingenberg.htmltocfw.converter.node.OptionNode.Companion.createOptionNode
 import de.jensklingenberg.htmltocfw.converter.node.PathNode.Companion.createPathNode
 import de.jensklingenberg.htmltocfw.converter.node.TextAreaNode.Companion.createTextArea
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Comment
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
@@ -37,7 +40,7 @@ fun getMyNode(node: Node): MyNode {
         is Element -> {
             when (node.tagName()) {
                 "a" -> {
-                    createAnode(node)
+                    createANode(node)
                 }
                 "form" -> {
                     createForm(node)
@@ -56,7 +59,7 @@ fun getMyNode(node: Node): MyNode {
                     EmptyNode()
                 }
                 "option" -> {
-                    OptionNode(node.attributes(), node.childNodes())
+                    createOptionNode(node)
                 }
                 "optgroup" -> {
                     createOptGroupNode(node)
@@ -78,7 +81,8 @@ fun getMyNode(node: Node): MyNode {
                 }
 
                 else -> {
-                    GenericNode(node.tagName(), node.childNodes(), node.attributes())
+                    createGenericNode(node)
+
                 }
             }
         }

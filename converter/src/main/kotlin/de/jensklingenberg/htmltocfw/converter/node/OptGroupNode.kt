@@ -1,6 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Node
 
 /**
@@ -14,7 +15,6 @@ class OptGroupNode(
 ) :
     MyNode {
 
-
     private val TAG = "OptGroup"
     override fun accept(visitor: Visitor) {
         visitor.visitOptGroup(this)
@@ -22,22 +22,23 @@ class OptGroupNode(
 
     override fun toString(): String {
 
-        var str = "$TAG ("
+        var str = "$TAG "
 
+        val arguments = mutableListOf<String>()
 
-        val attrText = parseAttributes(htmlAttributes)
-        str += attrText
-
-        if (attrText.isNotBlank()) {
-            str += (",")
+        if (htmlAttributes.isNotEmpty()) {
+            arguments.add(parseAttributes(htmlAttributes))
         }
-        str += "label = \"${label}\"" + ")"
+
+        arguments.add("label = \"${label}\"")
+
+        str += "("+ arguments.joinToString { it } + ")"
+
+        str += "{"
 
         val childNodesText = childNodes.joinToString("") {
             getMyNode(it).toString()
         }
-
-        str += "{"
         if (childNodesText.isNotBlank()) {
             str += "\n" + childNodesText + "\n"
         }

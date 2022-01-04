@@ -1,4 +1,6 @@
 import de.jensklingenberg.htmltocfw.converter.htmlToCompose
+import de.jensklingenberg.htmltocfw.converter.node.ANode
+import de.jensklingenberg.htmltocfw.converter.node.ComposeAttribute
 import de.jensklingenberg.htmltocfw.converter.node.GenericNode
 import de.jensklingenberg.htmltocfw.converter.node.LabelNode
 import org.jsoup.nodes.Attribute
@@ -19,11 +21,8 @@ class ConverterTest {
             
             """.trimIndent()
 
-        val labelAttributes = object : Attributes() {
-            init {
-                put(Attribute("for", "testId"))
-            }
-        }
+        val labelAttributes = emptyList<ComposeAttribute>()
+
 
         val testImg = Element("img").apply {
             val testImgAttributes = object : Attributes() {
@@ -36,7 +35,7 @@ class ConverterTest {
         }
 
 
-        val text = LabelNode(labelAttributes, mutableListOf(testImg)).toString()
+        val text = LabelNode(labelAttributes, mutableListOf(testImg), "testId").toString()
 
         assertEquals(exp, text)
     }
@@ -54,37 +53,28 @@ class ConverterTest {
             
             """.trimIndent()
 
-        val buttonAttributes = object : Attributes() {
-            init {
-                put(Attribute("type", "button"))
-                put(Attribute("onclick", "alert('Hello world!')"))
-            }
-        }
+        val buttonAttributes =
+            listOf(ComposeAttribute("type", "button"), ComposeAttribute("onclick", "alert('Hello world!')"))
+
 
         val text = GenericNode("button", mutableListOf(TextNode("Hello World")), buttonAttributes).toString()
 
         assertEquals(exp, text)
     }
 
+
+
     @Test
     fun ANodeTest() {
         val exp = """
-            A (attrs = {
-            attr("href","www.example.com")
-            }){
+            A (href = "www.example.com"){
             Text("Hello World")
             
             }
-
+            
             """.trimIndent()
 
-        val buttonAttributes = object : Attributes() {
-            init {
-                put(Attribute("href", "www.example.com"))
-            }
-        }
-
-        val text = GenericNode("a", mutableListOf(TextNode("Hello World")), buttonAttributes).toString()
+        val text = ANode(mutableListOf(TextNode("Hello World")), "www.example.com", emptyList()).toString()
 
         assertEquals(exp, text)
     }

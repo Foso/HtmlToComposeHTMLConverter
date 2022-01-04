@@ -1,14 +1,14 @@
 package de.jensklingenberg.htmltocfw.converter
 
 import de.jensklingenberg.htmltocfw.converter.node.ComposeAttribute
-import org.jsoup.nodes.Attribute
+import de.jensklingenberg.htmltocfw.converter.node.withEscapedSymbol
 
 
 fun parsePropertyValueWithCssUnit(propName: String, propValue: String, composePropName: String): String {
     val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
 
     return if (unitType == null) {
-        "property(\"$propName\",\"${propValue}\")"
+        "$composePropName(\"${propValue}\")"
     } else {
         val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, ".${unitType.key}") }
         "$composePropName(${newValue})"
@@ -85,11 +85,11 @@ fun parseStyleProperties(propName: String, propValue: String): String {
             "position(Position.${propValue.capitalize()})"
         }
 
-        "background-image", "border-radius", "box-sizing", "font-family", "font-size", "letter-spacing", "text-align", "text-decoration" -> {
+        "background-image", "border-radius", "box-sizing",  "font-size", "letter-spacing", "text-align", "text-decoration" -> {
             //font-size --> fontSize
             val (first, second) = propName.split("-")
             val composePropName = first + second.capitalize()
-            parsePropertyValueWithCssUnit(propName, propValue, composePropName)
+            parsePropertyValueWithCssUnit(propName, propValue.withEscapedSymbol(), composePropName)
         }
 
         "cursor", "duration", "font", "height", "width", "margin", "padding", "left", "top", "bottom" -> {

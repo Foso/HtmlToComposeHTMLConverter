@@ -1,6 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Attributes
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
@@ -19,7 +20,7 @@ class TextAreaNode(
     }
 
     override fun toString(): String {
-        var str = "$TAG ("
+        var str = "$TAG "
 
         val arguments = mutableListOf(parseAttributes(attrs.asList()))
 
@@ -27,8 +28,8 @@ class TextAreaNode(
             arguments.add("value = $value")
         }
 
-        str += arguments.joinToString { it }
-        str += ")\n"
+        str += "("+arguments.joinToString { it } +")"
+        str += "\n"
         return str
     }
 

@@ -156,7 +156,7 @@ boxSizing("border-box")
 }
 "body" style { 
 fontFamily("Arial")
-property("margin","0")
+margin("0")
 }
 ".header" style { 
 padding(60.px)

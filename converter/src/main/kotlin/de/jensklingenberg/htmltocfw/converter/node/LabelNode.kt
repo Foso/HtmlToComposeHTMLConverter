@@ -1,6 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
 
@@ -22,21 +23,21 @@ class LabelNode(
     }
 
     override fun toString(): String {
-        var str = "$TAG ("
+        var str = "$TAG "
 
         val arguments = mutableListOf<String>()
-        if(attrs.isNotEmpty()){
+        if (attrs.isNotEmpty()) {
             arguments.add(parseAttributes(attrs))
         }
         arguments.add("forId = \"${forIdValue}\"")
 
-        str += arguments.joinToString { it } + ")"
+        str += "(" + arguments.joinToString { it } + ")"
+
+        str += "{"
 
         val childNodesText = childNodes.joinToString("") {
             getMyNode(it).toString()
         }
-
-        str += "{"
         if (childNodesText.isNotBlank()) {
             str += "\n" + childNodesText
         }

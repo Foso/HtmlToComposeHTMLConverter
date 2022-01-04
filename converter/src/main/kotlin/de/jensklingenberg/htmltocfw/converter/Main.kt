@@ -1,7 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter
 
 import de.jensklingenberg.htmltocfw.converter.node.LayoutNode
-import de.jensklingenberg.htmltocfw.converter.node.MyVisitor
+import de.jensklingenberg.htmltocfw.converter.visitor.MyVisitor
 import de.jensklingenberg.htmltocfw.converter.node.getMyNode
 import org.jsoup.parser.ParseSettings
 import org.jsoup.parser.Parser
@@ -24,13 +24,6 @@ fun htmlToCompose(html: String): String {
     val parser = Parser.htmlParser();
     parser.settings(ParseSettings(true, true))
     val doc = parser.parseInput(html, "")
-
-    val myVisitor = MyVisitor()
-
-   // val layoutNode = LayoutNode(doc.body().childNodes().map { getMyNode(it) })
-
-
-
 
     val head = doc.head().childNodes().joinToString("") { node ->
         getMyNode(node).toString()

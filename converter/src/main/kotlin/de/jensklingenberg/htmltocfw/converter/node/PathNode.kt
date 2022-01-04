@@ -1,9 +1,10 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Node
 
-class PathNode(private val attrs: List<ComposeAttribute>,val d:String) : MyNode {
+class PathNode(private val attrs: List<ComposeAttribute>, val dValue: String) : MyNode {
 
     private val TAG = "Path"
     override fun accept(visitor: Visitor) {
@@ -12,27 +13,30 @@ class PathNode(private val attrs: List<ComposeAttribute>,val d:String) : MyNode 
 
     override fun toString(): String {
         var str = "$TAG ("
-        val dValue = d
 
-        str += parseAttributes(attrs)
+        val arguments = mutableListOf<String>()
 
-        if (dValue.isNotBlank()) {
-            str += (",d = \"$dValue\"")
+        if (attrs.isNotEmpty()) {
+            arguments.add(parseAttributes(attrs))
         }
 
-        str += ")"
+        if (dValue.isNotBlank()) {
+            arguments.add("d = \"$dValue\"")
+        }
+
+        str += "(" + arguments.joinToString { it } + ")"
 
         return str
     }
 
-    companion object{
+    companion object {
         private val ATTR_D = "d"
         fun createPathNode(node: Node): PathNode {
             val htmlAttrs = node.attributes()
             val dValue = htmlAttrs.get(ATTR_D).capitalize()
             htmlAttrs.remove(ATTR_D)
-            val attrs = htmlAttrs.map { ComposeAttribute(it.key,it.value) }
-           return PathNode(attrs,dValue)
+            val attrs = htmlAttrs.map { ComposeAttribute(it.key, it.value) }
+            return PathNode(attrs, dValue)
         }
     }
 

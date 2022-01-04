@@ -7,9 +7,14 @@ import com.helger.css.decl.CSSStyleRule
 import com.helger.css.decl.CascadingStyleSheet
 import com.helger.css.reader.CSSReader
 import de.jensklingenberg.htmltocfw.converter.parseStyleProperties
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Element
 import java.nio.charset.StandardCharsets
 
+
+fun String.withEscapedSymbol(): String {
+    return this.replace("\"", "\\\"")
+}
 
 /**
  * This will transform the style tag to a StyleSheet
@@ -29,12 +34,20 @@ class StyleNode(private val htmlStyleNode: Element) : MyNode {
 
         var styleSheetBody = ""
         aCSS?.let {
+
+            if (it.hasFontFaceRules()) {
+                styleSheetBody += createFontFaceRules(it)
+            }
+
             it.allKeyframesRules.forEach { keyFrameRule ->
                 styleSheetBody += createKeyframe(keyFrameRule)
             }
 
             styleSheetBody += "init {\n"
 
+            if (it.hasFontFaceRules()) {
+                styleSheetBody += "fontFace()\n"
+            }
             it.allStyleRules.let {
                 styleSheetBody += if (mediaAttribute.isNotBlank()) {
                     createMediaRule(mediaAttribute, it)
@@ -57,6 +70,31 @@ class StyleNode(private val htmlStyleNode: Element) : MyNode {
         str += styleSheetBody
         str += "}\n"
         return str
+    }
+
+    /**
+     * FontFace Rules will be added with JavaScript, because there no other way to do
+     * it in Compose for Web
+     */
+    private fun createFontFaceRules(it: CascadingStyleSheet): String {
+        val fontFaceCss = "\"\"\"" + it.allFontFaceRules.joinToString("\n") { fontFaceRule ->
+            var fontFaceStr = "@font-face {\n"
+            fontFaceRule.allDeclarations.forEach { decl ->
+                fontFaceStr += decl.property + ":" + decl.expressionAsCSSString + ";\n"
+            }
+            fontFaceStr += "}\n"
+            fontFaceStr
+        } + "\"\"\""
+
+        return "fun fontFace() {\n" +
+                "val newStyle = document.getElementsByTagName(\"style\")[0] ?: document.createElement(\"style\")\n" +
+                "\n" +
+                "newStyle.append(\n" +
+                "document.createTextNode($fontFaceCss)\n" +
+                ")\n" +
+                "\n" +
+                "document.head?.appendChild(newStyle);\n" +
+                "}\n"
     }
 
     private fun parseCascadingStyleSheet(text: String): CascadingStyleSheet? {

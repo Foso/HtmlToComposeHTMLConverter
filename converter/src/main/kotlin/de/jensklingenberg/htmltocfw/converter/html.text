@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
+<head>
+<style> 
+@font-face {
+  font-family: myFirstFont;
+  src: url(sansation_light.woff);
+}
+
+div {
+  font-family: myFirstFont;
+}
+</style>
+</head>
 <body>
 
-<h1>The textarea element</h1>
+<h1>The @font-face Rule</h1>
 
-<form action="/action_page.php">
-<label for="w3review">Review of W3Schools:</label>
-<textarea id="w3review" name="w3review" rows="4" cols="50">
-  At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-  </textarea>
-  <br><br>
-  <input type="submit" value="Submit">
-</form>
+<div>With CSS, websites can finally use fonts other than the pre selected "web-safe" fonts.</div>
 
-<p>Click the "Submit" button and the form-data will be sent to a page on the
-server called "action_page.php".</p>
 </body>
 </html>

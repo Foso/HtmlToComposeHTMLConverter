@@ -1,29 +1,33 @@
 @Composable
 fun GeneratedComposable(){
-  
+ fun appStylesheet() = object : StyleSheet() {
+fun fontFace() {
+val newStyle = document.getElementsByTagName("style")[0] ?: document.createElement("style")
+
+newStyle.append(
+document.createTextNode("""@font-face {
+font-family:myFirstFont;
+src:url(sansation_light.woff);
+}
+""")
+)
+
+document.head?.appendChild(newStyle);
+}
+init {
+fontFace()
+"div" style { 
+property("font-family","myFirstFont")
+}
+}}
+ 
+Style(appStylesheet())
 H1 {
-Text("The textarea element")
+Text("The @font-face Rule")
 
 }
-Form (action = "/action_page.php"){
-Label (forId = "w3review"){
-Text("Review of W3Schools:")
-}
-TextArea (attrs = {
-id("w3review")
-name("w3review")
-attr("rows","4")
-attr("cols","50")
-}, value = " At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies. ")
-Br {}
-Br {}
-Input (attrs = {
-attr("value","Submit")
-}, type = InputType.Submit)
-
-}
-P {
-Text("Click the \"Submit\" button and the form-data will be sent to a page on the server called \"action_page.php\".")
+Div {
+Text("With CSS, websites can finally use fonts other than the pre selected \"web-safe\" fonts.")
 
 }
 }

@@ -1,6 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.Node
 
@@ -13,7 +14,6 @@ class ANode(
     val href: String = "",
     val attrs: List<ComposeAttribute>
 ) : MyNode {
-    val composableName = "A"
 
     override fun accept(visitor: Visitor) {
         visitor.visitA(this)
@@ -21,7 +21,7 @@ class ANode(
 
     override fun toString(): String {
 
-        var str = "$composableName ("
+        var str = "A ("
         val hrefValue = href
 
         val arguments = mutableListOf<String>()
@@ -30,7 +30,7 @@ class ANode(
             arguments.add(parseAttributes(attrs))
         }
 
-        arguments.add("href =\"${hrefValue}\"")
+        arguments.add("href = \"${hrefValue}\"")
 
         str += arguments.joinToString { it } + ")"
 
@@ -50,7 +50,7 @@ class ANode(
 
     companion object {
 
-        fun createAnode(node: Element): ANode {
+        fun createANode(node: Element): ANode {
             val htmlAttributes = node.attributes()
             val hrefValue = htmlAttributes.get("href")
             htmlAttributes.remove("href")
@@ -62,6 +62,4 @@ class ANode(
     }
 
 }
-
-data class ComposeParameter(val name: String, val value: String)
 

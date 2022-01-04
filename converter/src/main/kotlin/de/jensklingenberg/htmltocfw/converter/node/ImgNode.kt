@@ -1,6 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Element
 
 /**
@@ -15,12 +16,12 @@ class ImgNode(private val attrs: List<ComposeAttribute>, val src: String = "", v
 
     override fun toString(): String {
 
-        var str = "$TAG ("
+        var str = "$TAG "
 
         val arguments = mutableListOf<String>()
 
-        if(attrs.isNotEmpty()){
-           arguments.add(parseAttributes(attrs))
+        if (attrs.isNotEmpty()) {
+            arguments.add(parseAttributes(attrs))
         }
 
         arguments.add("src = \"${src}\"")
@@ -29,8 +30,8 @@ class ImgNode(private val attrs: List<ComposeAttribute>, val src: String = "", v
             arguments.add("alt = \"${it}\"")
         }
 
-        str += arguments.joinToString { it }
-        str += ")\n"
+        str += "(" + arguments.joinToString { it } + ")"
+        str += "\n"
 
         return str
     }

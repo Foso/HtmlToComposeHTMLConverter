@@ -1,6 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
 import de.jensklingenberg.htmltocfw.converter.parseAttributes
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.Node
 
 /**
@@ -20,27 +21,26 @@ class FormNode(
     }
 
     override fun toString(): String {
-        var str = "$TAG ("
+        var str = "$TAG "
 
         val arguments = mutableListOf<String>()
-        if(attrs.isNotEmpty()){
+        if (attrs.isNotEmpty()) {
             arguments.add(parseAttributes(attrs))
         }
+
         arguments.add("action = \"${actionValue}\"")
 
-        str += arguments.joinToString { it } + ")"
+        str += "(" + arguments.joinToString { it } + ")"
 
+        str += "{"
         val childNodesText = childNodes.joinToString("") { node ->
             getMyNode(node).toString()
         }
-
-        str += "{"
-
         if (childNodesText.isNotBlank()) {
             str += "\n" + childNodesText + "\n"
         }
 
-        str += ("}\n")
+        str += "}\n"
         return str
     }
 

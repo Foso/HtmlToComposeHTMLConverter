@@ -1,5 +1,6 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.TextNode
 
 /**

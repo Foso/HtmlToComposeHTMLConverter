@@ -1,4 +1,6 @@
-package de.jensklingenberg.htmltocfw.converter.node
+package de.jensklingenberg.htmltocfw.converter.visitor
+
+import de.jensklingenberg.htmltocfw.converter.node.*
 
 interface Visitor {
     fun visitText(textNode: CFWTextNode)
