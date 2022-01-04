@@ -1,5 +1,7 @@
 package de.jensklingenberg.htmltocfw.converter
 
+import de.jensklingenberg.htmltocfw.converter.node.LayoutNode
+import de.jensklingenberg.htmltocfw.converter.visitor.MyVisitor
 import de.jensklingenberg.htmltocfw.converter.node.getMyNode
 import org.jsoup.parser.ParseSettings
 import org.jsoup.parser.Parser
@@ -8,11 +10,11 @@ import java.io.File
 fun main() {
 
     val html =
-        File("/Users/jklingenberg/Code/2021/jk/HtmlToComposeWebConverter/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/html.text").readText()
+        File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/html.text").readText()
 
     val text = htmlToCompose(html)
 
-    File("/Users/jklingenberg/Code/2021/jk/HtmlToComposeWebConverter/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/Result.txt").writeText(
+    File("/home/jens/Code/2021/jk/HtmlToComposeWeb/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/Result.txt").writeText(
         text
     )
 }
@@ -33,14 +35,14 @@ fun htmlToCompose(html: String): String {
         getMyNode(node).toString()
     }
 
-    val wrappedBody = if (hasStyle) {
+    val bodyContent = if (hasStyle) {
         "Style(appStylesheet())\n$body"
     } else {
         body
     }
 
 
-    return "@Composable\nfun GeneratedComposable(){\n $head \n$wrappedBody}\n"
+    return "@Composable\nfun GeneratedComposable(){\n $head \n$bodyContent}\n"
 }
 
 

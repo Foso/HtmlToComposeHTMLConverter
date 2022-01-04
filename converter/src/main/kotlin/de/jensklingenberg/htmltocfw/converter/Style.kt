@@ -1,6 +1,20 @@
 package de.jensklingenberg.htmltocfw.converter
 
-import org.jsoup.nodes.Attribute
+import de.jensklingenberg.htmltocfw.converter.node.ComposeAttribute
+import de.jensklingenberg.htmltocfw.converter.node.withEscapedSymbol
+
+
+fun parsePropertyValueWithCssUnit(propName: String, propValue: String, composePropName: String): String {
+    val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
+
+    return if (unitType == null) {
+        "$composePropName(\"${propValue}\")"
+    } else {
+        val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, ".${unitType.key}") }
+        "$composePropName(${newValue})"
+    }
+
+}
 
 /**
  *
@@ -8,25 +22,56 @@ import org.jsoup.nodes.Attribute
 fun parseStyleProperties(propName: String, propValue: String): String {
 
     return when (propName) {
-        "background-image" -> {
-            "backgroundImage(${propValue})"
-        }
-        "border-radius" -> {
-            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
+        "animation" -> {
+            var str = ""
+            val animationPropertyList = propValue.split(" ")
+            val keyFrameName = animationPropertyList.getOrNull(0)
+            val duration = animationPropertyList.getOrNull(1)
+            val iterationCount = animationPropertyList.getOrNull(2)
 
-            if (unitType == null) {
-                "property(\"$propName\",\"${propValue}\")"
-            } else {
-                val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
-                "borderRadius(${newValue})"
+            keyFrameName?.let {
+                str += "animation(${keyFrameName}){\n"
             }
+            duration?.let {
+                str += parseStyleProperties("duration", duration) + "\n"
+            }
+
+            iterationCount?.let {
+                str += "iterationCount = listOf(" + if (iterationCount == "infinite") {
+                    "null)"
+                } else {
+                    "$it)"
+                }
+
+            }
+
+            str += "}"
+            str
         }
-        "box-sizing" -> {
-            "boxSizing(\"${propValue}\")"
+        "animation-duration", "animation-delay" -> {
+            //Ignore
+            ""
         }
-        "cursor" -> {
-            "cursor(\"${propValue}\")"
+        "border" -> {
+            val animationPropertyList = propValue.split(" ")
+            val widthValue = animationPropertyList.getOrNull(0)
+            val lineStyle = animationPropertyList.getOrNull(1)
+            val color = animationPropertyList.getOrNull(2)
+            var str = "border {\n"
+            widthValue?.let {
+                str += parseStyleProperties("width", widthValue) + "\n"
+            }
+            color?.let {
+                str += parseStyleProperties("color", it) + "\n"
+            }
+            lineStyle?.let {
+                str += "style(LineStyle.${it.capitalize()})" + "\n"
+            }
+
+            str += "\n}"
+            str
         }
+
         "display" -> {
             "display(DisplayStyle.${propValue.capitalize()})"
         }
@@ -36,47 +81,30 @@ fun parseStyleProperties(propName: String, propValue: String): String {
         "flex-wrap" -> {
             "flexWrap(FlexWrap.${propValue.capitalize()})"
         }
-        "font-family" -> {
-            "fontFamily(\"${propValue}\")"
-        }
-        "font-size" -> {
-            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
-
-            if (unitType == null) {
-                "property(\"$propName\",\"${propValue}\")"
-            } else {
-                val newValue = propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
-                "fontSize(${newValue})"
-            }
-        }
-        "text-align" -> {
-            "textAlign(\"${propValue}\")"
+        "position" -> {
+            "position(Position.${propValue.capitalize()})"
         }
 
-        "text-decoration" -> {
-            "textDecoration(\"${propValue}\")"
+        "background-image", "border-radius", "box-sizing",  "font-size", "letter-spacing", "text-align", "text-decoration" -> {
+            //font-size --> fontSize
+            val (first, second) = propName.split("-")
+            val composePropName = first + second.capitalize()
+            parsePropertyValueWithCssUnit(propName, propValue.withEscapedSymbol(), composePropName)
         }
-        "height", "width", "font", "margin", "padding" -> {
-            val unitType = unitsMap.entries.find { propValue.endsWith(it.value) }
 
-            if (unitType == null) {
-                "property(\"$propName\",\"${propValue}\")"
-            } else {
-
-                val newValue =
-                    propValue.split(" ").joinToString { it.replace(unitType.value, "") + ".${unitType.key}" }
-                "$propName(${newValue})"
-            }
+        "cursor", "duration", "font", "height", "width", "margin", "padding", "left", "top", "bottom" -> {
+            parsePropertyValueWithCssUnit(propName, propValue, propName)
         }
         else -> {
-            "property(\"$propName\",\"${propValue}\")"
+            val fixValue = propValue.replace("\"", "\\\"")
+            "property(\"$propName\",\"${fixValue}\")"
         }
     }
 
 }
 
 
-fun parseStyleText(attribute: Attribute): String {
+fun parseStyleText(attribute: ComposeAttribute): String {
     var str = "style {\n"
 
     //Find better way to parse style

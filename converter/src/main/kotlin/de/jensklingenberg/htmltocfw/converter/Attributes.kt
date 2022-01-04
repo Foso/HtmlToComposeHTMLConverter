@@ -1,11 +1,17 @@
 package de.jensklingenberg.htmltocfw.converter
 
+import de.jensklingenberg.htmltocfw.converter.node.ComposeAttribute
 import org.jsoup.nodes.Attribute
+
+fun parseAttributes(attributesList: List<Attribute>): String {
+    return parseAttributes(attributesList.map { ComposeAttribute(it.key,it.value) })
+}
 
 /**
  *
  */
-fun parseAttributes(attributesList: List<Attribute>): String {
+@JvmName("parseAttributes1")
+fun parseAttributes(attributesList: List<ComposeAttribute>): String {
 
     var str = ""
     attributesList.forEachIndexed { index, attribute ->
@@ -21,7 +27,7 @@ fun parseAttributes(attributesList: List<Attribute>): String {
                 "draggable(Draggable.${attribute.value.capitalize()})"
             }
             "style" -> {
-                parseStyleText(attribute)
+                parseStyleText(ComposeAttribute(attribute.key,attribute.value))
             }
             "required", "hidden", "selected", "disabled" -> {
                 attribute.key + "()"
@@ -45,6 +51,7 @@ fun parseAttributes(attributesList: List<Attribute>): String {
             }
         }
         str += "\n"
+
         if (index == attributesList.lastIndex) {
             str += "}"
         }

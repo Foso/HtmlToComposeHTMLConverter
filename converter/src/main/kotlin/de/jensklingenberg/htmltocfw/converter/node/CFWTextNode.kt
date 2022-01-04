@@ -1,5 +1,6 @@
 package de.jensklingenberg.htmltocfw.converter.node
 
+import de.jensklingenberg.htmltocfw.converter.visitor.Visitor
 import org.jsoup.nodes.TextNode
 
 /**
@@ -14,6 +15,10 @@ class CFWTextNode(private val textNode: TextNode) : MyNode {
         } else {
             ""
         }
+    }
+
+    override fun accept(visitor: Visitor) {
+        visitor.visitText(this)
     }
 
 }
