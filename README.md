@@ -67,14 +67,12 @@ Alternatively you can download the plugin from the release archive https://githu
 
 ## :fire:&nbsp;What's new?
 
-### 1.0.4
+### 1.0.5
 
 <ul>
-    <li>CSS style rules and media rules in < style> tag will now be converted to 
+    <li>KeyFrame rules in < style> tag will now be converted to 
 Compose for Web StyleSheets</li>
-<li>All generated Code will be wrapped inside a Composable called GeneratedComposable() </li>
-<li> < title> will be converted to KotlinJS document.title=XZY </li>
-
+<li> font-face rules will be converted to KotlinJS code</li>
 </ul>
 
 # 🏠 Architecture
