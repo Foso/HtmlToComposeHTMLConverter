@@ -3,7 +3,7 @@ fun properties(key: String) = project.findProperty(key).toString()
 
 
 plugins {
-    id("org.jetbrains.intellij") version "1.3.0"
+    id("org.jetbrains.intellij") version "1.5.3"
     java
     kotlin("jvm")
     id("org.jetbrains.compose")
@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "de.jensklingenberg"
-version = "1.0.4"
+version = "1.0.5"
 
 repositories {
     mavenCentral()
@@ -32,6 +32,7 @@ dependencies {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version.set(properties("platformVersion"))
+
 }
 
 tasks{
@@ -46,8 +47,7 @@ tasks{
 
     patchPluginXml {
         version.set(properties("pluginVersion"))
-        sinceBuild.set(properties("pluginSinceBuild"))
-        untilBuild.set(properties("pluginUntilBuild"))
+
     }
 }
 

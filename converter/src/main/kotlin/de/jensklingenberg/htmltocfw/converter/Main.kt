@@ -8,11 +8,11 @@ import java.io.File
 fun main() {
 
     val html =
-        File("/Users/jklingenberg/Code/2021/jk/HtmlToComposeWebConverter/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/html.text").readText()
+        File("/home/jens/Code/2022/jk/HtmlToComposeWeb/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/html.text").readText()
 
     val text = htmlToCompose(html)
 
-    File("/Users/jklingenberg/Code/2021/jk/HtmlToComposeWebConverter/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/Result.txt").writeText(
+    File("/home/jens/Code/2022/jk/HtmlToComposeWeb/converter/src/main/kotlin/de/jensklingenberg/htmltocfw/converter/Result.txt").writeText(
         text
     )
 }

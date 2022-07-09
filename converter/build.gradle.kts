@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.7.10"
     application
 }
 
@@ -20,7 +20,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.0-alpha5") {
         because("ph-css")
     }
-    implementation("com.helger:ph-css:6.4.0")
+    implementation("com.helger:ph-css:6.5.0")
 
 }
 
