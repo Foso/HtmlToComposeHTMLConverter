@@ -33,14 +33,14 @@ fun htmlToCompose(html: String): String {
         getMyNode(node).toString()
     }
 
-    val wrappedBody = if (hasStyle) {
+    val bodyContent = if (hasStyle) {
         "Style(appStylesheet())\n$body"
     } else {
         body
     }
 
 
-    return "@Composable\nfun GeneratedComposable(){\n $head \n$wrappedBody}\n"
+    return "@Composable\nfun GeneratedComposable(){\n $head \n$bodyContent}\n"
 }
 
 

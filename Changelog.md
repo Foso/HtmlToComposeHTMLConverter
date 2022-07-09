@@ -1,3 +1,11 @@
+### 1.0.5
+
+<ul>
+    <li>KeyFrame rules in < style> tag will now be converted to 
+Compose for Web StyleSheets</li>
+<li> font-face rules will be converted to KotlinJS code</li>
+</ul>
+
 ### 1.0.4
 
 <ul>
