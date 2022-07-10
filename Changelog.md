@@ -1,3 +1,6 @@
+### 1.0.6
+Same as 1.0.5, but compatible with latest IntelliJ
+
 ### 1.0.5
 
 <ul>
