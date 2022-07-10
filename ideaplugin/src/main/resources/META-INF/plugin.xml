@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>de.jensklingenberg.htmltocfw</id>
     <name>HTML to Compose Web Converter</name>
-    <vendor email="mail@jensklingenberg.de" url="http://www.jensklingenberg.de">Jens Klingenberg</vendor>
+    <vendor email="mail@jensklingenberg.de" url="https://jensklingenberg.de/">Jens Klingenberg</vendor>
 
     <description><![CDATA[
     <h3>IntelliJ-based Plugin that can convert HTML to Compose for Web code.</h3>
