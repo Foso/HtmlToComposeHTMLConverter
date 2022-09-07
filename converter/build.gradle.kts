@@ -17,7 +17,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jsoup:jsoup:1.14.3")
-    implementation("org.slf4j:slf4j-api:2.0.0-alpha5") {
+    implementation("org.slf4j:slf4j-api:2.0.0") {
         because("ph-css")
     }
     implementation("com.helger:ph-css:6.5.0")
