@@ -3,7 +3,7 @@ fun properties(key: String) = project.findProperty(key).toString()
 
 
 plugins {
-    id("org.jetbrains.intellij") version "1.9.0"
+    id("org.jetbrains.intellij") version "1.11.0"
     java
     kotlin("jvm")
     id("org.jetbrains.compose")
