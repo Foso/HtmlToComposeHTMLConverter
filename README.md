@@ -1,4 +1,4 @@
-<h1 align="center">HtmlToComposeForWebConverter</h1>
+<h1 align="center">HtmlToComposeHTMLConverter</h1>
 IntelliJ-based plugin that can convert HTML to Compose HTML code.
 
 Turn this:
